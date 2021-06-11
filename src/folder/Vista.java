@@ -49,12 +49,13 @@ public class Vista extends JFrame{
         public void actionPerformed(ActionEvent e) {
            switch(e.getActionCommand()){
                case "Empezar":
-                   Cronometro c1 = new Cronometro(dtm,1,1,cI,2.5);
-                   Cronometro c2 = new Cronometro(dtm,0,0,cI,2.5);
+                   Cronometro c1 = new Cronometro(cI,1,1, dtm);
+                   //Cronometro c2 = new Cronometro(dtm,0,0);
                    Impresora im = new Impresora(cI);
                    im.start();
-                  ((Cronometro)tabla.getValueAt(1,1)).start();
-                  ((Cronometro)tabla.getValueAt(0,0)).start();
+                  Cronometro c = ((Cronometro)tabla.getValueAt(1,1));
+                  c.start();
+                  
                    
            }
         }

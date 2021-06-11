@@ -15,22 +15,28 @@ import java.util.logging.Logger;
  */
 public class Impresora extends Thread{
     ColaImpresiones cola;
+    String nombre;
     
    public Impresora(ColaImpresiones cola){
+       super();
         this.cola = cola;
+        this.nombre = "";
    }
    
    public void run(){
        while(1 == 1){
-       Producto c = cola.imprimir();
-       System.out.println();
-       for(int i = 0; i < c.getCantidad(); i++){
-           System.out.println("Imprimiendo hoja :"+i);
+       Impresion c = cola.imprimir();
+        for(int i = 0;i<c.getCantidad();i++){
+            System.out.println(nombre +"  Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
          try{  
            Thread.sleep(2500);
          }catch(InterruptedException e){}
+            
+        }
        }
-       
-       }
+   }
+   
+   public void setNombre(String nombre){
+       this.nombre = nombre;
    }
 }

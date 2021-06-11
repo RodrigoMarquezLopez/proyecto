@@ -8,31 +8,35 @@ package folder;
 import intento1.Cuenta;
 import intento1.Producto;
 import java.math.MathContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class Cronometro extends Thread { //una clase que hereda de la clase Thread
+    protected String tiempo;
+    protected ColaImpresiones color;
+    protected ColaImpresiones bn;
+    private AbstractTableModel dtm;
+    private int row;
+    private int column;
+    private int nBn;
+    private int col;
+    private double costo;
     
-    public DefaultTableModel dtm;
-    public boolean parar;
-    public int columna,fila;
-    protected Cuenta cuenta;
-    protected Producto renta;
-    protected ColaImpresiones cola;
-    protected double costo;
-    protected double tarifa;
-    private Producto impresiones;
-    
-    public Cronometro(DefaultTableModel dtm,int columna, int fila,ColaImpresiones cola,double precio){// Contructor porque la clase es heredada 
+    public Cronometro(ColaImpresiones bn,ColaImpresiones color,int row, int column, AbstractTableModel dtm){// Contructor porque la clase es heredada 
         super();
+        nBn = 0;
+        col = 0;
+        costo = 0.5;
         this.dtm = dtm;
-        dtm.setValueAt(this, fila, columna);
-        this.setName("");
-        this.fila = fila;
-        this.columna = columna;
-        this.cola = cola;
-        this.costo = precio;
-        this.tarifa = tarifa;
-        impresiones = new Producto(3,"Impresiones color",2.5);
+        this.row = row;
+        this.column = column;
+        tiempo = "0:0:0";
+        dtm.setValueAt(tiempo,row,column);
+        this.bn = bn;
+        this.color = color;
     }
     @Override
     public void run() {
@@ -40,20 +44,32 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
     int nuSeg=55; //El Contador de de segundos
     int nuHora=0; //El Contador de Horas   
         try {//si ocurre un error al dormir el proceso(sleep(999))
-            for (; ;){ //inicio del for infinito           
+            while(dtm.getValueAt(row,1).equals("No Disponible")){ //inicio del for infinito           
                if(nuSeg!=59) {//si no es el ultimo segundo
                    nuSeg++; //incremento el numero de segundos                                  
                 }else{
                     if(nuMin!=59){//si no es el ultimo minuto
                         nuSeg=0;//pongo en cero los segundos 
                         nuMin++;//incremento el numero de minutos
-                        costo = costo + tarifa;
-                        double random = Math.random();
-                            //if(random > 0.4899){
+                        dtm.setValueAt(costo*nuMin,row,3);
+                        double random = 0.7;
+                            if(random > 0.4899){
+                                if(random > 0.65){
+                                Impresion i = new Impresion(3,"Impresiones B/N",0.95,(row+1));
+                                i.setCantidad(nuMin*10);
+                                nBn = nBn + i.getCantidad();
+                                dtm.setValueAt(nBn,row,4);
+                                bn.enviarImprimir(i);
+                                
+                                }else{
+                                Impresion i = new Impresion(3,"Impresiones color",2.5,(row+1));
+                                i.setCantidad(nuMin*10);
+                                col = col + i.getCantidad();
+                                dtm.setValueAt(col,row,5);
+                                color.enviarImprimir(i);
+                                }
                                
-                               cola.enviarImprimir(new Producto(3,"Impresiones color"+Math.random(),2.5));
-                               //System.out.println("Agregado");
-                            //}
+                            }
                                 
                     }else{//incremento el numero de horas
                             nuHora++;
@@ -61,10 +77,13 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
                             nuSeg=0;//pongo en cero los segundos           
                     }
                 }               
-            dtm.setValueAt(nuHora+":"+nuMin+":"+nuSeg,fila,columna);//Muestro en pantalla el cronometro
-            
-            sleep(999);//Duermo el hilo durante 999 milisegundos(casi un segundo, quintandole el tiempo de proceso)
-            }//Fin del for infinito             
+                //tiempo = nuHora+":"+nuMin+":"+nuSeg;//Muestro en pantalla el cronometro
+                dtm.setValueAt(nuHora+":"+nuMin+":"+nuSeg,row,column);
+                //System.out.println(tiempo);
+                //System.out.println(nuHora+":"+nuMin+":"+nuSeg+" "+fila+" "+columna);
+            sleep(997);//Duermo el hilo durante 999 milisegundos(casi un segundo, quintandole el tiempo de proceso)
+            }
+            return;//Fin del for infinito             
         } catch (Exception ex) {
              System.out.println(ex.getMessage());//Imprima el error
         }                 

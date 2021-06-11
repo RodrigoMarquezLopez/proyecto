@@ -14,33 +14,32 @@ import java.util.Queue;
  * @author rodri
  */
 public class ColaImpresiones {
-    protected Queue <Producto> cola;
+    protected Queue <Impresion> cola;
     private int numeroHojasIm;
     
     
     public ColaImpresiones(){
-        cola = new LinkedList<Producto>();
+        cola = new LinkedList<Impresion>();
         numeroHojasIm = 0;
         
     }
     
     
-    public synchronized void enviarImprimir(Producto c){
+    public synchronized void enviarImprimir(Impresion c){
         cola.add(c);
         System.out.println("Agregado");
         notifyAll();
     }
     
-    public synchronized Producto imprimir(){
-        char d = ' ';
-        if(!cola.isEmpty())
+    public synchronized Impresion imprimir(){
+      if(!cola.isEmpty())
             System.out.println("Pila vacia, enesperea el hilo "+Thread.currentThread().getName());
         while(cola.isEmpty())
             try{
                 this.wait();
             }catch(InterruptedException e){}
         
-        Producto a = cola.remove();
+        Impresion a = cola.remove();
         return a;
     }
     
