@@ -45,30 +45,31 @@ public class Controlador implements ActionListener{
         cargarTablaEquipos();
         this.cola1 = new ColaImpresiones();
         this.cola2 = new ColaImpresiones();
-        im = new Impresora(cola1);
-        im2 = new Impresora(cola2);
+        im = new Impresora(cola1,this.vp.modeloIBN);
+        im2 = new Impresora(cola2,this.vp.modeloColor);
         im.setNombre("Blanco y Negro");
         im2.setNombre("Color");
         im.start();
         im2.start();
-        vp.tablaEquipos.updateUI();
+        this.vp.colaBn.updateUI();
+        this.vp.colaColor.updateUI();
         
     }
     
     public void cargarTablaEquipos(){
-        vp.tablaEquipos.getColumnModel().getColumn(0).setPreferredWidth(220);
-        vp.tablaEquipos.getColumnModel().getColumn(1).setPreferredWidth(220);
-        vp.tablaEquipos.getColumnModel().getColumn(2).setPreferredWidth(220);
-        vp.tablaEquipos.getColumnModel().getColumn(3).setPreferredWidth(220);
-        vp.tablaEquipos.getColumnModel().getColumn(4).setPreferredWidth(220);
-        vp.tablaEquipos.getColumnModel().getColumn(5).setPreferredWidth(220);
+        vp.tablaEquipos.getColumnModel().getColumn(0).setPreferredWidth(50);
+        vp.tablaEquipos.getColumnModel().getColumn(1).setPreferredWidth(50);
+        vp.tablaEquipos.getColumnModel().getColumn(2).setPreferredWidth(50);
+        vp.tablaEquipos.getColumnModel().getColumn(3).setPreferredWidth(50);
+        vp.tablaEquipos.getColumnModel().getColumn(4).setPreferredWidth(50);
+        vp.tablaEquipos.getColumnModel().getColumn(5).setPreferredWidth(50);
         
-        vp.tablaEquipos.setRowHeight(120);
-        List<Object[]> lista = new ArrayList<Object[]>();
+        vp.tablaEquipos.setRowHeight(50);
+        //List<Object[]> lista = new ArrayList<Object[]>();
         for(int i = 0; i<4 ; i++){
             Object [] ob = new Object[6];
-            ob[0] = new JPanel();
-            ((JPanel)ob[0]).add(new JLabel("Equipo :"+(i+1)));
+            ob[0] = new JLabel("Equipo :"+(i+1));
+            //((JPanel)ob[0]).add(new JLabel("Equipo :"+(i+1)));
             ob[1] = "Disponible";
             ob[2] = "0:0:0";
             ob[3] = 0.0;
@@ -81,6 +82,7 @@ public class Controlador implements ActionListener{
         }
         //vp.modeloE.ad
         vp.tablaEquipos.updateUI();
+        
     }
 
     

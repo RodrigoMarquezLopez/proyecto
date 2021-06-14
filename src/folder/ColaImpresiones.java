@@ -8,6 +8,7 @@ package folder;
 import intento1.Producto;
 import java.util.LinkedList;
 import java.util.Queue;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,12 +16,11 @@ import java.util.Queue;
  */
 public class ColaImpresiones {
     protected Queue <Impresion> cola;
-    private int numeroHojasIm;
+    protected DefaultTableModel dtm;
     
     
     public ColaImpresiones(){
         cola = new LinkedList<Impresion>();
-        numeroHojasIm = 0;
         
     }
     
@@ -32,9 +32,7 @@ public class ColaImpresiones {
     }
     
     public synchronized Impresion imprimir(){
-      if(!cola.isEmpty())
-            System.out.println("Pila vacia, enesperea el hilo "+Thread.currentThread().getName());
-        while(cola.isEmpty())
+    while(cola.isEmpty())
             try{
                 this.wait();
             }catch(InterruptedException e){}

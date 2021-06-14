@@ -5,6 +5,7 @@
  */
 package folder;
 
+import ClasesComponentes.Tabla;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -37,26 +38,28 @@ public class VistaPrincipal extends JFrame{
     private JPanel panelEquipos;
     private JPanel panelImpresoras;
     private String [] columnas = {"Equipo","Estado","Tiempo","Costo","Impresiones B/N","Impresiones Color"};
-    protected JTable tablaEquipos;
-    protected ModeloTablaEquipos modeloE;
+    private String [] columnasImp = {"Equipo","Cantidad de Hojas"};
+    protected Tabla tablaEquipos;
+    protected DefaultTableModel modeloE;
+    protected DefaultTableModel modeloIBN;
+    protected DefaultTableModel modeloColor;
     protected JButton renta;
     protected JButton detener;
     protected JMenuBar barraOpc;
     protected JMenu opciones;
     protected JMenuItem venta;
+    protected Tabla colaBn;
+    protected Tabla colaColor;
     
     public  VistaPrincipal(){
-                this.setSize(820, 550);
-        setUndecorated(true);
-        setOpacity(1.0f);
-        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 35, 35);
-        setShape(forma);
-        setOpacity(1.0f);
+       // this.setSize(820, 550);
+       //this.setBackground(new Color(15, 157, 167));
+        
         //setLayout(new GridLayout(1, 1));
         //add(Logo());
         //add(Log());
 
-        this.setResizable(false);
+        //this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -78,15 +81,17 @@ public class VistaPrincipal extends JFrame{
         add(panelPrincipal);
         
         //Panel Equipos
-        modeloE = new ModeloTablaEquipos(columnas,0);
-        tablaEquipos = new JTable(modeloE);
+        modeloE = new DefaultTableModel(columnas,0);
+        tablaEquipos = new Tabla(modeloE);
+        //tablaEquipos.setModel(modeloE);
         //tablaEquipos.setPreferredSize(new Dimension(700,700));
-        tablaEquipos.setDefaultRenderer(Object.class,new Render());
+        //tablaEquipos.setDefaultRenderer(Object.class,new Render());
         JScrollPane panelT = new JScrollPane(tablaEquipos);
         //panelT.setPreferredSize(new Dimension(700,600));
         JPanel cen = new JPanel();
         cen.setLayout(new BorderLayout());
         cen.add(panelT,BorderLayout.CENTER);
+        cen.setBackground(new Color(15, 157, 167));
         panelEquipos.add(cen,BorderLayout.CENTER);
         JPanel der = new JPanel();
         der.setLayout(new FlowLayout());
@@ -99,7 +104,18 @@ public class VistaPrincipal extends JFrame{
         panelEquipos.add(der,BorderLayout.EAST);
         
         //Panel Impresoras
+        //panelPrincipal.add(panelEquipos);
+        //panelPrincipal.add(panelImpresoras);
+        modeloIBN = new DefaultTableModel(columnasImp,0);
+        modeloColor = new DefaultTableModel(columnasImp,0);
+        panelImpresoras.setLayout(new GridLayout(2,0));
+        colaBn = new Tabla(modeloIBN);
+        colaColor = new Tabla(modeloIBN);
+        JScrollPane s = new JScrollPane(colaBn);
+        JScrollPane s1 = new JScrollPane(colaColor);
         
+        panelImpresoras.add(s,0);
+        panelImpresoras.add(s1,1);
         
         
         this.setJMenuBar(barraOpc);
@@ -125,21 +141,7 @@ public class VistaPrincipal extends JFrame{
         vp.conectControlador(c);
     }
     
-     private class Render extends DefaultTableCellRenderer {
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int roe, int column){
-        if(value instanceof JButton){
-            JButton btn = (JButton)value;
-            return btn;
-        }
-        if(value instanceof JPanel){
-            JPanel panel = (JPanel)value;
-            return panel;
-        }
-            
-        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, roe, column);
-    
-    }
-            }   
+       
     
     
 
