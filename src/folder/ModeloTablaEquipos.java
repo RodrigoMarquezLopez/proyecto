@@ -21,7 +21,5 @@ import javax.swing.table.DefaultTableModel;
  * @author rodri
  */
 public class ModeloTablaEquipos extends DefaultTableModel{
-    public  ModeloTablaEquipos(Object [] os, int i){
-        super(os, i);
-   }
+
 }

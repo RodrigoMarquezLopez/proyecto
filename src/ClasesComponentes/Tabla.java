@@ -29,7 +29,9 @@ import javax.swing.table.TableModel;
 public class Tabla extends JTable{
     
     public Tabla(TableModel dtm){
+        
         super(dtm);
+        this.setFont(new Font("Serif",Font.BOLD,18));
         JTableHeader jtableHeader = this.getTableHeader();
         jtableHeader.setDefaultRenderer(new GestionEncabezadoTabla());
         this.setTableHeader(tableHeader);
@@ -40,29 +42,47 @@ public class Tabla extends JTable{
         }
    }
     
+    public Tabla(){
+    super();
+        JTableHeader jtableHeader = this.getTableHeader();
+        jtableHeader.setDefaultRenderer(new GestionEncabezadoTabla());
+        this.setTableHeader(tableHeader);
+        Enumeration <TableColumn> en = this.getColumnModel().getColumns();
+        while(en.hasMoreElements()){
+            TableColumn tc = en.nextElement();
+             tc.setCellRenderer(new Render());
+        }
+    
+    }
+    
     
          private class Render extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int roe, int column){
-       super.getTableCellRendererComponent(table, value, isSelected, hasFocus, roe, column);
-       this.setHorizontalAlignment( JLabel.LEFT );
+       //super.getTableCellRendererComponent(table, value, isSelected, hasFocus, roe, column);
+       this.setHorizontalAlignment(CENTER);
+       JComponent com = null;
         if(value instanceof JLabel){
             JLabel panel = (JLabel)value;
+            panel.setOpaque(true);
+            panel.setFont(new Font("Serif",Font.HANGING_BASELINE,12));
+            panel.setBackground(new Color(0,206,209));
             return panel;
         }
+        
          if (hasFocus) {                
             this.setBackground(Color.lightGray);   
         }
-        
+       
        boolean addRow = (roe % 2 == 0);
         Color c  = new Color(205,205,205);
-        //setBackground(c);
-        this.setHorizontalAlignment( JLabel.LEFT );
+        this.setHorizontalAlignment( CENTER );
+        this.setFont(new Font("Serif",Font.ITALIC,20));
           
         if(addRow){
             setBackground(c);
         }
         
-        return this;
+        return  super.getTableCellRendererComponent(table, value, isSelected, hasFocus, roe, column);
     
     }
             }
@@ -78,12 +98,8 @@ public class Tabla extends JTable{
         
         if( value instanceof String ) {
             jcomponent = new JLabel((String) value);
-            ((JLabel)jcomponent).setHorizontalAlignment( SwingConstants.CENTER );
-            ((JLabel)jcomponent).setSize( 30, jcomponent.getWidth() );   
-            ((JLabel)jcomponent).setPreferredSize( new Dimension(6, jcomponent.getWidth())  );
-        }
-        if(value instanceof JLabel){
-            jcomponent = (JLabel)value;
+            ((JLabel)jcomponent).setFont(new Font("Serif",Font.ROMAN_BASELINE,18));
+            
             ((JLabel)jcomponent).setHorizontalAlignment( SwingConstants.CENTER );
             ((JLabel)jcomponent).setSize( 30, jcomponent.getWidth() );   
             ((JLabel)jcomponent).setPreferredSize( new Dimension(6, jcomponent.getWidth())  );
@@ -92,7 +108,7 @@ public class Tabla extends JTable{
         jcomponent.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(255, 255, 255)));
         jcomponent.setOpaque(true);
         //jcomponent.setBackground( new Color(236,234,219) );
-        jcomponent.setBackground(new Color(33, 45, 62, 255));
+        jcomponent.setBackground(new Color(0,206,209));
         jcomponent.setToolTipText("Tabla Seguimiento Equipos");
         jcomponent.setForeground(Color.white);
         

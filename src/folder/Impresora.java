@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,10 +25,13 @@ public class Impresora extends Thread{
     DefaultTableModel dtm;
     DefaultTableModel dt1;
     LinkedList<Impresion> contenidoCola;
+    JLabel equipo;
+    JProgressBar barra;
        //Tabla tabla;
-   public Impresora(ColaImpresiones cola,DefaultTableModel dtm){
+   public Impresora(ColaImpresiones cola,DefaultTableModel dtm,JLabel equipo, JProgressBar barra){
        super();
-       //this.tabla = a;
+        this.equipo = equipo;
+        this.barra = barra;
         this.cola = cola;
         this.nombre = "";
         this.dtm = dtm;
@@ -38,9 +42,12 @@ public class Impresora extends Thread{
    public void run(){
        while(1 == 1){
        Impresion c = cola.imprimir();
-
+       equipo.setText("Imprimirendo equipo :"+c.getEquipo());
+       barra.setValue(0);
+       this.cola.numero ++;
        for(int i = 0;i<c.getCantidad();i++){
     System.out.println(nombre +"  Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
+          barra.setValue(barra.getValue()+10);
            if(!cola.cola.isEmpty()){
        Object [] ob = new Object[2];
        ob[0] = cola.cola.peek().getEquipo();

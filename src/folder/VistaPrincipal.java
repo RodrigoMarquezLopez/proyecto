@@ -5,30 +5,39 @@
  */
 package folder;
 
+import ClasesComponentes.BotonPersonalizado;
 import ClasesComponentes.Tabla;
+import ClasesComponentes.Titulo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.MenuBar;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -37,35 +46,28 @@ import javax.swing.table.DefaultTableModel;
 public class VistaPrincipal extends JFrame{
     private JPanel panelEquipos;
     private JPanel panelImpresoras;
-    private String [] columnas = {"Equipo","Estado","Tiempo","Costo","Impresiones B/N","Impresiones Color"};
+    private String [] columnas = {"Equipo","Estado","Tiempo","Total de Uso","#Imp. B/N","#Imp Color"};
     private String [] columnasImp = {"Equipo","Cantidad de Hojas"};
     protected Tabla tablaEquipos;
     protected DefaultTableModel modeloE;
     protected DefaultTableModel modeloIBN;
     protected DefaultTableModel modeloColor;
-    protected JButton renta;
-    protected JButton detener;
+    protected BotonPersonalizado renta;
+    protected BotonPersonalizado detener;
     protected JMenuBar barraOpc;
     protected JMenu opciones;
     protected JMenuItem venta;
     protected Tabla colaBn;
     protected Tabla colaColor;
+    protected JProgressBar barrabn;
+    protected JProgressBar barracolor;
+    protected JLabel equipo;
+    protected JLabel equipo2;
+    private JScrollPane s;
+    private JScrollPane s1;
     
     public  VistaPrincipal(){
-       // this.setSize(820, 550);
-       //this.setBackground(new Color(15, 157, 167));
-        
-        //setLayout(new GridLayout(1, 1));
-        //add(Logo());
-        //add(Log());
-
-        //this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
         JTabbedPane panelPrincipal = new JTabbedPane();
-        
         barraOpc = new JMenuBar();
         opciones = new JMenu("Opciones");
         venta = new JMenuItem("Venta Nueva");
@@ -75,56 +77,123 @@ public class VistaPrincipal extends JFrame{
         panelImpresoras = new JPanel();
         panelPrincipal.add(panelEquipos);
         panelPrincipal.add(panelImpresoras);
-        panelEquipos.setLayout(new BorderLayout());
         panelPrincipal.setTitleAt(0,"Renta Equipo");
         panelPrincipal.setTitleAt(1,"Estado Impresoras");
         add(panelPrincipal);
         
-        //Panel Equipos
+        
+        
+        panelEquipos.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        panelEquipos.setBackground(new Color(33, 45, 62, 255));
         modeloE = new DefaultTableModel(columnas,0);
         tablaEquipos = new Tabla(modeloE);
-        //tablaEquipos.setModel(modeloE);
-        //tablaEquipos.setPreferredSize(new Dimension(700,700));
-        //tablaEquipos.setDefaultRenderer(Object.class,new Render());
-        JScrollPane panelT = new JScrollPane(tablaEquipos);
-        //panelT.setPreferredSize(new Dimension(700,600));
-        JPanel cen = new JPanel();
-        cen.setLayout(new BorderLayout());
-        cen.add(panelT,BorderLayout.CENTER);
-        cen.setBackground(new Color(15, 157, 167));
-        panelEquipos.add(cen,BorderLayout.CENTER);
-        JPanel der = new JPanel();
-        der.setLayout(new FlowLayout());
-        renta = new JButton("Rentar");
-        detener = new JButton("Detener");
-        detener.setEnabled(false);
-        //renta.setPreferredSize(new Dimension(150,150));
-        der.add(renta);
-        der.add(detener);
-        panelEquipos.add(der,BorderLayout.EAST);
+        tablaEquipos.setRowHeight(100);
+        JScrollPane sp = new JScrollPane(tablaEquipos);
+        //sp.setPreferredSize(tablaEquipos.getMaximumSize());
+        renta = new BotonPersonalizado();
+        renta.setText("RENTAR");
+        detener = new BotonPersonalizado();
+        detener.setText("DETENER");
+        renta.setPreferredSize(new Dimension(150,100));
+        detener.setPreferredSize(new Dimension(150,100));
+       
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.0;
+        gbc.weightx = 0.0;
+        gbc.fill = GridBagConstraints.NORTH;
+        Titulo titulo = new Titulo("SIMULADOR DE CIBER");
+        panelEquipos.add(titulo,gbc);
         
-        //Panel Impresoras
-        //panelPrincipal.add(panelEquipos);
-        //panelPrincipal.add(panelImpresoras);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 3;
+        gbc.weightx = 1.0;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        panelEquipos.add(sp,gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1.0;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.NONE;
+        panelEquipos.add(renta,gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 1.0;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.NONE;
+        panelEquipos.add(detener,gbc);
+        //
+        barrabn = new JProgressBar();
+        barracolor = new JProgressBar();
+        equipo = new JLabel();
+        equipo2 = new JLabel();
         modeloIBN = new DefaultTableModel(columnasImp,0);
         modeloColor = new DefaultTableModel(columnasImp,0);
-        panelImpresoras.setLayout(new GridLayout(2,0));
         colaBn = new Tabla(modeloIBN);
         colaColor = new Tabla(modeloIBN);
-        JScrollPane s = new JScrollPane(colaBn);
-        JScrollPane s1 = new JScrollPane(colaColor);
+        s = new JScrollPane(colaBn);
+        s1 = new JScrollPane(colaColor);
+        panelImpresoras.setLayout(new GridLayout(3,0));
+        panelImpresoras.setBackground(new Color(33, 45, 62, 255));
         
-        panelImpresoras.add(s,0);
-        panelImpresoras.add(s1,1);
         
         
-        this.setJMenuBar(barraOpc);
+          panelImpresoras.add(new Titulo("INFORMACION IMPRESORAS"),0);
+          panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",false),1);
+          panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",true),2);
+        
+        
+        //this.setJMenuBar(barraOpc);
         this.setVisible(true);
-        this.setSize(new Dimension(700,700));
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(new Dimension(800,800));
+        this.setLocationRelativeTo(null);
+        //this.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         
     
+    }
+    
+    
+    private JPanel formarPanelImpresora(String url,boolean color){
+        JPanel p = new JPanel();
+        p.setLayout(new FlowLayout());
+        JLabel imagen = new JLabel(new ImageIcon(url));
+        JLabel siguiente = new JLabel("Siguiente:");
+        siguiente.setForeground(Color.WHITE);
+        siguiente.setFont(new Font("Arial",Font.BOLD,16));
+        p.add(imagen);
+        if(!color){
+        p.add(barrabn);
+        equipo.setForeground(Color.WHITE);
+        equipo.setFont(new Font("Arial",Font.BOLD,16));
+        p.add(equipo);
+        p.add(siguiente);
+        s.setPreferredSize(new Dimension(300,50));
+        p.add(s);
+        }else{
+        p.add(barracolor);
+        equipo2.setForeground(Color.WHITE);
+        equipo2.setFont(new Font("Arial",Font.BOLD,16));
+        p.add(equipo2);
+        p.add(siguiente);
+        s1.setPreferredSize(new Dimension(300,50));
+        p.add(s1);
+        }
+        p.setOpaque(false);
+        return p;
     }
     
     public void conectControlador(Controlador c){

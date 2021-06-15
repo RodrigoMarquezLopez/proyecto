@@ -83,6 +83,41 @@ public class Modelo {
         return Productos;
     }
     
+    public List<Object[]> listEquipos(){
+    PreparedStatement ps;
+        //Objeto para recoger los datos devueltos
+        ResultSet rs;
+
+        //Obtener datos de todos los clientes
+        String consultaSQL = "SELECT tipo,tarifa FROM Dispositivos;";
+        // Objeto List que contendrá todos los clientes
+        List<Object[]> equipos = new ArrayList<Object[]>();
+        try {
+            //Preparar el statement con la consulta SQL
+            ps  = getConexion().prepareStatement(consultaSQL);
+                      
+            //Ejecutarla y obtiene en rs el resultado
+            rs  = ps.executeQuery();
+            
+            //Recorrer el resultado para crear instancias de Cliente
+            while(rs.next()){
+              Object [] o = new Object[2];
+              o[0] = rs.getString(0);
+              o[1] = rs.getDouble(1);
+                //Añadir registro a registro en el vector
+                
+                // agregar a la lista cada uno de los clientes
+                equipos.add(o);
+            }
+ 
+        } catch (SQLException e) {
+            System.err.println("Error al CARGAR DATOS " + e);
+        }
+        return equipos;
+    
+    
+    }
+    
     public List<Producto> listProductos(String busqueda){
         PreparedStatement ps;
         //Objeto para recoger los datos devueltos
