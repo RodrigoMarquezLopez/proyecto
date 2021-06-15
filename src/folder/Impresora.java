@@ -45,9 +45,10 @@ public class Impresora extends Thread{
        equipo.setText("Imprimirendo equipo :"+c.getEquipo());
        barra.setValue(0);
        this.cola.numero ++;
+       int suma = 100/c.getCantidad();
        for(int i = 0;i<c.getCantidad();i++){
-    System.out.println(nombre +"  Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
-          barra.setValue(barra.getValue()+10);
+          System.out.println(nombre +"  Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
+          barra.setValue(barra.getValue()+suma);
            if(!cola.cola.isEmpty()){
        Object [] ob = new Object[2];
        ob[0] = cola.cola.peek().getEquipo();

@@ -142,7 +142,7 @@ public class VistaPrincipal extends JFrame{
         modeloIBN = new DefaultTableModel(columnasImp,0);
         modeloColor = new DefaultTableModel(columnasImp,0);
         colaBn = new Tabla(modeloIBN);
-        colaColor = new Tabla(modeloIBN);
+        colaColor = new Tabla(modeloColor);
         s = new JScrollPane(colaBn);
         s1 = new JScrollPane(colaColor);
         panelImpresoras.setLayout(new GridLayout(3,0));

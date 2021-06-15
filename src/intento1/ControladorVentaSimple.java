@@ -20,7 +20,7 @@ public class ControladorVentaSimple implements ActionListener {
     private VistaVentaSimple ventanaSimple;
     private ArrayList<Object[]> aux = new ArrayList<Object[]>();
     private Cuenta cuenta = new Cuenta();
-    private VistaCuenta vc;
+   // private VistaCuenta vc;
     
     public ControladorVentaSimple (VistaVentaSimple vs){
         modelo = new Modelo("proyecto");
@@ -124,8 +124,6 @@ public class ControladorVentaSimple implements ActionListener {
         }
     }
     
-    public void setVistaCuenta(VistaCuenta vc){
-        this.vc = vc;
-    }
+
     
 }

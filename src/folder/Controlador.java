@@ -70,9 +70,6 @@ public class Controlador implements ActionListener{
             ob[5] = 0;
             vp.modeloE.addRow(ob);
         }
-        
-      
-        
     }
 
     
