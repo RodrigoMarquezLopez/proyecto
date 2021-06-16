@@ -89,7 +89,7 @@ public class Modelo {
         ResultSet rs;
 
         //Obtener datos de todos los clientes
-        String consultaSQL = "SELECT tipo,tarifa FROM Dispositivos;";
+        String consultaSQL = "SELECT * FROM dispositivos;";
         // Objeto List que contendrá todos los clientes
         List<Object[]> equipos = new ArrayList<Object[]>();
         try {
@@ -101,9 +101,10 @@ public class Modelo {
             
             //Recorrer el resultado para crear instancias de Cliente
             while(rs.next()){
-              Object [] o = new Object[2];
-              o[0] = rs.getString(0);
-              o[1] = rs.getDouble(1);
+              Object [] o = new Object[3];
+              o[0] = rs.getInt(1);
+              o[1] = rs.getString(2);
+              o[2] = rs.getDouble(3);
                 //Añadir registro a registro en el vector
                 
                 // agregar a la lista cada uno de los clientes

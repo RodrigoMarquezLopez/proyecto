@@ -65,9 +65,11 @@ public class VistaPrincipal extends JFrame{
     protected JProgressBar barracolor;
     protected JLabel equipo;
     protected JLabel equipo2;
-    private JScrollPane s;
-    private JScrollPane s1;
+    private   JScrollPane s;
+    private   JScrollPane s1;
     protected JLabel usr;
+    protected JLabel totalC;
+    protected JLabel totalB;
     protected BotonPersonalizado ventaN;
     protected BotonPersonalizado confgP;
     
@@ -82,9 +84,7 @@ public class VistaPrincipal extends JFrame{
         panelPrincipal.setTitleAt(1,"Estado Impresoras");
         add(panelPrincipal);
         
-        
-        
-        panelEquipos.setLayout(new BorderLayout());
+         panelEquipos.setLayout(new BorderLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         panelEquipos.setBackground(new Color(33, 45, 62, 255));
         modeloE = new DefaultTableModel(columnas,0);
@@ -92,12 +92,21 @@ public class VistaPrincipal extends JFrame{
         tablaEquipos.setRowHeight(100);
         JScrollPane sp = new JScrollPane(tablaEquipos);
         sp.setPreferredSize(new Dimension(900,500));
-        usr = new JLabel();
+        usr = new JLabel("Raaaaaaaaaaaamon");
         usr.setOpaque(false);
         usr.setIcon(new ImageIcon("src/imagenes/usuario.png"));
         usr.setFont(new Font("Arial",Font.BOLD,16));
         usr.setForeground(Color.WHITE);
         usr.setHorizontalAlignment(SwingConstants.LEFT);
+        
+        totalB = new JLabel("Total de Hojas Impresas");
+        totalB.setFont(new Font("Arial",Font.BOLD,16));
+        totalB.setForeground(Color.WHITE);
+        
+        totalC = new JLabel("Total de Hojas Impresas");
+        totalC.setFont(new Font("Arial",Font.BOLD,16));
+        totalC.setForeground(Color.WHITE);
+        
         renta = new BotonPersonalizado();
         renta.setText("RENTAR");
         renta.setIcon(new ImageIcon("src/imagenes/renta.png"));
@@ -236,6 +245,8 @@ public class VistaPrincipal extends JFrame{
         renta.addActionListener(c);
         detener.setActionCommand("detener");
         detener.addActionListener(c);
+        ventaN.setActionCommand("vender");
+        ventaN.addActionListener(c);
     }
     
     public static void main(String[] args) {

@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -40,6 +41,8 @@ public class VistaVentaSimple extends JDialog{
     protected BotonPersonalizado       agregar;
     protected BotonPersonalizado       eliminar;
     protected CuadroTex    busqueda;
+    protected CuadroTex    recibido;
+    protected JLabel       cambio;
     protected Spin      cantidad;
     protected BotonPersonalizado       buscar;
     protected BotonPersonalizado       confirmar;
@@ -49,8 +52,10 @@ public class VistaVentaSimple extends JDialog{
     protected ModeloTProductosVenta mtv;
     protected BotonPersonalizado generaCuenta;
     protected final String rBuqueda = "Ingresa busqueda";
+    protected JLabel total;
     
-    public VistaVentaSimple(Cuenta as){
+    public VistaVentaSimple(JFrame f,Cuenta as){
+        super(f);
         cuentaAs = as;
         this.setLayout(new BorderLayout());
         Titulo titulo = new Titulo("VENTA");
@@ -88,6 +93,9 @@ public class VistaVentaSimple extends JDialog{
         JLabel bq = new JLabel("Buscar:  ");
         bq.setForeground(Color.WHITE);
         bq.setFont(new Font("Arial",Font.BOLD,16));
+        total = new JLabel("Total :  ");
+        total.setForeground(Color.WHITE);
+        total.setFont(new Font("Arial",Font.BOLD,16));
         busqueda = new CuadroTex();
         busqueda.setText(rBuqueda);
         buscar = new BotonPersonalizado();
@@ -113,21 +121,46 @@ public class VistaVentaSimple extends JDialog{
        der.add(agregar);
        eliminar = new BotonPersonalizado();
        eliminar.setText("ELIMINAR");
+       eliminar.setEnabled(false);
        generaCuenta = new BotonPersonalizado();
        generaCuenta.setText("GENERAR CUENTA");
        generaCuenta.setEnabled(false);
        der.add(eliminar);
        der.add(jsp2);
+       der.add(total);
+       
+       //this.add(generaCuenta,BorderLayout.SOUTH);
+       JPanel sur = new JPanel();
+       JPanel cal = new JPanel();
+       cal.setLayout(new FlowLayout());
+       cal.setOpaque(false);
+       sur.setLayout(new BorderLayout());
+       sur.setOpaque(false);
+       JLabel re = new JLabel("Recibo :   ");
+       re.setForeground(Color.WHITE);
+       re.setFont(new Font("Arial",Font.BOLD,16));
+       recibido = new CuadroTex();
+       cambio = new JLabel("Cambio :    ");
+       cambio.setForeground(Color.WHITE);
+       cambio.setFont(new Font("Arial",Font.BOLD,16));
+       cal.add(re);
+       cal.add(recibido);
+       cal.add(cambio);
+       sur.add(cal,BorderLayout.NORTH);
+       sur.add(generaCuenta,BorderLayout.SOUTH);
        
        
-       this.add(generaCuenta,BorderLayout.SOUTH);
        principal.add(der,1);
        principal.add(cen,2);
-       
+       this.add(sur,BorderLayout.SOUTH);
        this.add(principal,BorderLayout.CENTER);
        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
        this.setVisible(true);
-       this.setPreferredSize(new Dimension(1300,500));
+       this.setSize(new Dimension(1200,700));
+       this.setResizable(false);
+       this.setLocationRelativeTo(null);
+       this.setFocusableWindowState(true);
+       this.setModal(true);
        //this.pack();
         
         
@@ -146,6 +179,9 @@ public void conectaControlador(  ControladorVentaSimple c  ){
         buscar.setActionCommand("buscar");
         generaCuenta.addActionListener(c);
         generaCuenta.setActionCommand("cuenta");
+        recibido.addKeyListener(c);
+        busqueda.addKeyListener(c);
+        busqueda.addFocusListener(c);
         //sólo se permite pulsar una fila a la vez.
         //tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }    

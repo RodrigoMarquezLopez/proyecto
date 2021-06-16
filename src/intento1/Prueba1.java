@@ -52,7 +52,7 @@ import javax.swing.JTable;
  */
 public class Prueba1 {
     public static void main(String[] args){
-       VistaVentaSimple vi = new VistaVentaSimple(new Cuenta()); 
+       VistaVentaSimple vi = new VistaVentaSimple(null,new Cuenta()); 
        ControladorVentaSimple c = new ControladorVentaSimple(vi);
        vi.conectaControlador(c);
     }

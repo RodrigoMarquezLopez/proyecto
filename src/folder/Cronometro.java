@@ -25,16 +25,17 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
     private int col;
     private double costo;
     
-    public Cronometro(ColaImpresiones bn,ColaImpresiones color,int row, int column, AbstractTableModel dtm){// Contructor porque la clase es heredada 
+    public Cronometro(ColaImpresiones bn,ColaImpresiones color,int row, int column, AbstractTableModel dtm,Double tarifa){// Contructor porque la clase es heredada 
         super();
         nBn = 0;
         col = 0;
-        costo = 0.5;
+        costo = tarifa;
         this.dtm = dtm;
         this.row = row;
         this.column = column;
         tiempo = "0:0:0";
         dtm.setValueAt(tiempo,row,column);
+        dtm.setValueAt(costo,row,3);
         this.bn = bn;
         this.color = color;
     }
@@ -51,7 +52,7 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
                     if(nuMin!=59){//si no es el ultimo minuto
                         nuSeg=0;//pongo en cero los segundos 
                         nuMin++;//incremento el numero de minutos
-                        dtm.setValueAt(costo*nuMin,row,3);
+                        dtm.setValueAt(costo*(nuMin+1),row,3);
                         double random = 0.7;
                             if(random > 0.4899){
                                 if(random > 0.65){
@@ -83,6 +84,7 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
                 //System.out.println(nuHora+":"+nuMin+":"+nuSeg+" "+fila+" "+columna);
             sleep(997);//Duermo el hilo durante 999 milisegundos(casi un segundo, quintandole el tiempo de proceso)
             }
+            dtm.setValueAt("0:0:0", row, column);
             return;//Fin del for infinito             
         } catch (Exception ex) {
              System.out.println(ex.getMessage());//Imprima el error
