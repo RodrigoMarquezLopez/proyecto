@@ -5,7 +5,6 @@
  */
 package folder;
 
-import ClasesComponentes.Tabla;
 import intento1.Producto;
 import java.util.ArrayList;
 import java.util.LinkedList;

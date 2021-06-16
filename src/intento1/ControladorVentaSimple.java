@@ -5,11 +5,14 @@
  */
 package intento1;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JDialog;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -42,6 +45,8 @@ public class ControladorVentaSimple implements ActionListener {
             }
         ventanaSimple.mtp.setDatos(lista);
         ventanaSimple.tablaP.updateUI();
+        
+        
   }
 
     @Override
@@ -92,12 +97,20 @@ public class ControladorVentaSimple implements ActionListener {
         break;
         
             case "cuenta":
-                
-                ventanaSimple.cuent.setText(cuenta.toString());
-                ventanaSimple.cuent.updateUI();
-                ventanaSimple.cuent.setEditable(false);
-                ventanaSimple.cuent.repaint();
+                JDialog vCuenta = new JDialog();
+                JTextArea cuent = new JTextArea();
+                vCuenta.setTitle("TICKET");
+                vCuenta.add(cuent);
+                vCuenta.setVisible(true);
+                vCuenta.setResizable(false);
+                vCuenta.setFont(new Font("Arial",Font.BOLD,16));
+                vCuenta.setSize(500,500);
+                cuent.setText(cuenta.toString());
+                cuent.updateUI();
+                cuent.setEditable(false);
+                cuent.repaint();
                 ventanaSimple.busqueda.setText(ventanaSimple.rBuqueda);
+                
                 cuenta = new Cuenta();
                 aux = new ArrayList<Object[]>();
                 this.ventanaSimple.mtv.setDatos(aux);

@@ -5,9 +5,16 @@
  */
 package intento1;
 
+import componentesproyecto.BotonPersonalizado;
+import componentesproyecto.CuadroTex;
+import componentesproyecto.Spin;
+import componentesproyecto.Tabla;
+import componentesproyecto.Titulo;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -18,94 +25,110 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author rodri
  */
 public class VistaVentaSimple extends JDialog{
+    private String [] columnas = {"Equipo","Estado","Tiempo","Total de Uso","#Imp. B/N","#Imp Color"};
+    private String [] columnasImp = {"Equipo","Cantidad de Hojas"};
     protected JPanel        principal;
-    protected JTable        tablaP;
-    protected JTable        tablaC;
-    protected JButton       agregar;
-    protected JButton       eliminar;
-    protected JTextField    busqueda;
-    protected JSpinner      cantidad;
-    protected JButton       buscar;
-    protected JButton       confirmar;
+    protected Tabla        tablaP;
+    protected Tabla       tablaC;
+    protected BotonPersonalizado       agregar;
+    protected BotonPersonalizado       eliminar;
+    protected CuadroTex    busqueda;
+    protected Spin      cantidad;
+    protected BotonPersonalizado       buscar;
+    protected BotonPersonalizado       confirmar;
     protected Cuenta        cuentaAs;
-    protected JTextArea     cuent;
+    //protected JTextArea     cuent;
     protected ModeloTablaProductos  mtp;
     protected ModeloTProductosVenta mtv;
-    protected JButton generaCuenta;
+    protected BotonPersonalizado generaCuenta;
     protected final String rBuqueda = "Ingresa busqueda";
     
     public VistaVentaSimple(Cuenta as){
         cuentaAs = as;
         this.setLayout(new BorderLayout());
-        JLabel titulo = new JLabel("Titulo mega mamalon");
+        Titulo titulo = new Titulo("VENTA");
+        titulo.setOpaque(false);
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        this.getContentPane().setBackground(new Color(33, 45, 62, 255));
         this.add(titulo,BorderLayout.NORTH);
         mtp = new ModeloTablaProductos();
         mtv = new ModeloTProductosVenta();
-        JPanel principal = new JPanel();
+        principal = new JPanel();
+        principal.setOpaque(false);
         JPanel der = new JPanel();
+        der.setOpaque(false);
         JPanel izq = new JPanel();
+        izq.setOpaque(false);
         JPanel cen = new JPanel();
-        principal.setLayout(new GridLayout(0,3));
-        tablaP = new JTable(mtp);
-        tablaC = new JTable(mtv);
+        cen.setOpaque(false);
+        principal.setLayout(new GridLayout(0,2));
+        //principal.setBackground(new Color(33, 45, 62, 255));
+        tablaP = new Tabla(mtp);
+        tablaP.setRowHeight(40);
+        tablaC = new Tabla(mtv);
+        tablaC.setRowHeight(40);
+       
         JScrollPane jsp1 = new JScrollPane(tablaP);
         JScrollPane jsp2 = new JScrollPane(tablaC);
-        
-        jsp1.setPreferredSize(new Dimension(300,300));
-        jsp2.setPreferredSize(new Dimension(300,300));
+        jsp2.setBackground(Color.lightGray);
+        jsp1.setPreferredSize(new Dimension(550,150));
+        jsp2.setPreferredSize(new Dimension(550,150));
         
         izq.setLayout(new FlowLayout());
         der.setLayout(new FlowLayout());
         cen.setLayout(new FlowLayout());
         
         JLabel bq = new JLabel("Buscar:  ");
-        busqueda = new JTextField(rBuqueda);
-        buscar = new JButton("Buscar");
+        bq.setForeground(Color.WHITE);
+        bq.setFont(new Font("Arial",Font.BOLD,16));
+        busqueda = new CuadroTex();
+        busqueda.setText(rBuqueda);
+        buscar = new BotonPersonalizado();
+        buscar.setText("BUSCAR");
         
         izq.add(bq);
         izq.add(busqueda);
         izq.add(buscar);
-        izq.add(jsp1);
-        principal.add(izq,0);
-        
-       der.add(new JLabel("Cantidad :"));
-       cantidad = new JSpinner();
+       izq.add(jsp1);
+       principal.add(izq,0);
+       JLabel canad = new JLabel("Cantidad :");
+       canad.setForeground(Color.WHITE);
+       canad.setFont(new Font("Arial",Font.BOLD,16));
+       der.add(canad);
+       der.setForeground(Color.WHITE);
+       der.setFont(new Font("Arial",Font.BOLD,16));
+       cantidad = new Spin();
        cantidad.setValue(1);
        der.add(cantidad);
-       agregar = new JButton("Agregar");
-       cuent= new JTextArea("");
+       agregar = new BotonPersonalizado();
+       agregar.setText("AGREGAR");
+       //cuent= new JTextArea("");
        der.add(agregar);
-       cuent.setPreferredSize(new Dimension(300,300));
-       cen.add(new JLabel("Ticket"));
-       cen.add(cuent);
-       
-       
-       //principal.add(cen,2);
-       
-       eliminar = new JButton("Eliminar");
-       generaCuenta = new JButton("Generar Cuenta");
+       eliminar = new BotonPersonalizado();
+       eliminar.setText("ELIMINAR");
+       generaCuenta = new BotonPersonalizado();
+       generaCuenta.setText("GENERAR CUENTA");
        generaCuenta.setEnabled(false);
        der.add(eliminar);
        der.add(jsp2);
        
-       der.add(generaCuenta);
        
+       this.add(generaCuenta,BorderLayout.SOUTH);
        principal.add(der,1);
        principal.add(cen,2);
        
        this.add(principal,BorderLayout.CENTER);
-       
-        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        this.setVisible(true);
-        this.setPreferredSize(new Dimension(1000,500));
-        this.setSize(700,700);
-       this.pack();
+       this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+       this.setVisible(true);
+       this.setPreferredSize(new Dimension(1300,500));
+       //this.pack();
         
         
     }
@@ -126,14 +149,7 @@ public void conectaControlador(  ControladorVentaSimple c  ){
         //sólo se permite pulsar una fila a la vez.
         //tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }    
-    
-    public JTable getTableP(){
-        return this.tablaP;
-    }
-    
-    public void setTable(JTable p){
-        this.tablaP = p;
-    }
+
     
     
     
