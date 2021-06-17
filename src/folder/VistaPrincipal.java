@@ -247,6 +247,8 @@ public class VistaPrincipal extends JFrame{
         detener.addActionListener(c);
         ventaN.setActionCommand("vender");
         ventaN.addActionListener(c);
+        confgP.setActionCommand("producto");
+        confgP.addActionListener(c);
     }
     
     public static void main(String[] args) {

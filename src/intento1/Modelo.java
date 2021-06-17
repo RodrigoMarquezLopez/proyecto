@@ -150,6 +150,53 @@ public class Modelo {
         return Productos;
     }
     
+     public boolean insertProducto(Producto c){
+        //Objeto para ejecutar las instrucciones en la base de datos
+        PreparedStatement ps;
+        String sqlInsertCliente = "insert into productos values (?,?,?);";
+        try{
+            //Preparar la instrucción
+            ps  = getConexion().prepareStatement(sqlInsertCliente);
+            //Indicar qué información se pasa al Statement
+            ps.setInt(1, c.getId());
+            ps.setString(2, c.getNombre());
+            ps.setDouble(3, c.getPrecio());
+            
+            //Ejecutar el comando insert
+            ps.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            //System.err.println("Error en la INSERCIÓN " + e );
+            return false;
+        }
+    }
+    
+         public boolean updateCliente(Producto c){
+        //Objeto para ejecutar los procedimientos almacenados en la base de datos
+        PreparedStatement ps;
+        String sqlUpdateCliente = "update productos set precio = ? where id_producto = ?;";
+        try{
+            //Preparar la llamada
+            ps  = getConexion().prepareStatement(sqlUpdateCliente);
+                
+            //Indicar qué información se pasa al procedimiento
+            ps.setDouble(1, c.getPrecio());
+            ps.setInt(2, c.getId());
+            
+            //Ejecutar el procedimiento
+            ps.executeUpdate();
+            //System.out.println(this.view.dtm.getValueAt(filaPulsada, 0));
+            return true;
+        }catch (SQLException e) {
+            //System.err.println("Error en la MODIFICACION");
+            return false;
+        }
+    }
+     
+     
+    
+    
+    
     
     private Connection getConexion() {
         return conexion;

@@ -5,10 +5,12 @@
  */
 package folder;
 
+import intento1.ControladorProductos;
 import intento1.ControladorVentaSimple;
 import intento1.Cuenta;
 import intento1.Modelo;
 import intento1.Producto;
+import intento1.VentanaProductos;
 import intento1.VistaVentaSimple;
 import java.awt.Component;
 import java.awt.Point;
@@ -23,6 +25,7 @@ import java.util.concurrent.Executors;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -87,12 +90,10 @@ public class Controlador implements ActionListener{
            
             
         }
-        for(int i = 0 ; i<tarifas.length;i++){
-            System.out.println(tarifas[i]);
-        }
+
     }
     
-    public void cargarCostoImpresiones(){
+    public int cargarCostoImpresiones(){
         List<Producto> productos = modelo.listProductos("Impresion");
         for(int i = 0; i<productos.size(); i++){
             Producto p = productos.get(i);
@@ -101,6 +102,7 @@ public class Controlador implements ActionListener{
             if(p.getNombre().equals("Impresiones B/N"))
                 impresionBN = p;
         }
+        return JDialog.DISPOSE_ON_CLOSE;
     }
 
     
@@ -162,6 +164,14 @@ public class Controlador implements ActionListener{
                 VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta()); 
                 ControladorVentaSimple contro = new ControladorVentaSimple(vi);
                 vi.conectaControlador(contro);
+                break;
+            case "producto":
+                VentanaProductos vpr = new VentanaProductos(vp);
+                vpr.setDefaultCloseOperation(cargarCostoImpresiones());
+                ControladorProductos cp = new ControladorProductos(vpr);
+                vpr.conectaControlador(cp);
+                
+                
                 break;
         
         }

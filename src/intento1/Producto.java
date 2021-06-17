@@ -34,6 +34,12 @@ public class Producto {
         this.cantidad = cantidad;
   }
   
+  public void setPrecio(double precio){
+       this.precio = precio;
+  
+  }
+  
+  
   public int getCantidad(){
       return cantidad;
   }

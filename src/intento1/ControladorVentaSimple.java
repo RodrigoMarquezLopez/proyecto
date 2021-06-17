@@ -36,7 +36,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
         modelo = new Modelo("proyecto");
         this.ventanaSimple = vs;
         cargarCuenta();
-        cargarTabla();
+        cargarTabla(); 
         
         
     }
@@ -120,6 +120,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             }
         ventanaSimple.mtp.setDatos(lista);
         ventanaSimple.tablaP.updateUI();
+        
                 }else{
                     JOptionPane.showMessageDialog(ventanaSimple,"Campo vacio, ingresa un nombre");
                 }
@@ -127,9 +128,11 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
         
             case "cuenta":
                 
+                try{
                 if(!ventanaSimple.recibido.getText().equals("")&&cuenta.getTotal()< Double.parseDouble(ventanaSimple.recibido.getText())){
                 ventanaSimple.cambio.setText("Cambio :    $"+String.format("%.2f",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal()));
-                JDialog vCuenta = new JDialog();
+                JDialog vCuenta = new JDialog(ventanaSimple);
+                vCuenta.setLocationRelativeTo(null);
                 JTextArea cuent = new JTextArea();
                 vCuenta.setTitle("TICKET");
                 vCuenta.add(cuent);
@@ -149,8 +152,13 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 this.ventanaSimple.mtv.setDatos(aux);
                 this.ventanaSimple.tablaC.updateUI();
                 ventanaSimple.generaCuenta.setEnabled(false);
+                
                 }else{
                     JOptionPane.showMessageDialog(ventanaSimple,"No es suficiente dinero");
+                }
+                }catch(NumberFormatException exc){
+                    JOptionPane.showMessageDialog(ventanaSimple,"Entrada no valida");
+                    ventanaSimple.recibido.setText("");
                 }
                 break;
         
@@ -176,6 +184,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
     @Override
     public void keyTyped(KeyEvent e) {
         char k = e.getKeyChar();
+        //System.out.println(k != '.');
         JTextField productor = (JTextField) e.getSource();
         if(productor == (JTextField)ventanaSimple.busqueda){
             if(ventanaSimple.busqueda.getSelectedText() != null)
@@ -185,8 +194,10 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
         if(productor == (JTextField)ventanaSimple.recibido){
             if(ventanaSimple.recibido.getSelectedText() != null)
                 ventanaSimple.recibido.setText("");
-            if(!Character.isDigit(k))
+            if(!Character.isDigit(k)){
+                if(k != '.')
                 e.consume();
+            }
         }
         
     }
