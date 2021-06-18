@@ -155,12 +155,10 @@ public class VistaVentaSimple extends JDialog{
        this.add(sur,BorderLayout.SOUTH);
        this.add(principal,BorderLayout.CENTER);
        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-       this.setVisible(true);
        this.setSize(new Dimension(1200,700));
        this.setResizable(false);
-       this.setLocationRelativeTo(null);
-       this.setFocusableWindowState(true);
-       this.setModal(true);
+       
+       //this.setModal(true);
        //this.pack();
         
         
@@ -182,8 +180,7 @@ public void conectaControlador(  ControladorVentaSimple c  ){
         recibido.addKeyListener(c);
         busqueda.addKeyListener(c);
         busqueda.addFocusListener(c);
-        //sólo se permite pulsar una fila a la vez.
-        //tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
     }    
 
     

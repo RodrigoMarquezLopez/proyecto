@@ -20,8 +20,9 @@ public class Cuenta{
     public Cuenta(){
         total = 0.0;
         contenido = new ArrayList<Producto>();
-        encabezado = "Nombre Tienda\n"+
-                      "Direccion";
+        encabezado = "            --------SIMULADOR CIBER--------\n"+
+                     "     Calle Aldama San Felipe del Agua Oax. 77, \n"+""
+                + "    San FELIPE, Centro, 71290 Oaxaca de Juárez, Oax.";
        
     }
     

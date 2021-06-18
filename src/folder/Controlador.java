@@ -48,6 +48,9 @@ public class Controlador implements ActionListener{
     protected Impresora im2;
     private Producto impresionColor;
     private Producto impresionBN;
+    private ControladorVentaSimple contro;
+    private ControladorProductos cproductos;
+
     
     public  Controlador(VistaPrincipal vp) {
         this.modelo = new Modelo("proyecto");
@@ -56,8 +59,8 @@ public class Controlador implements ActionListener{
         cargarTablaEquipos();
         this.cola1 = new ColaImpresiones();
         this.cola2 = new ColaImpresiones();
-        im = new Impresora(cola1,this.vp.modeloIBN,this.vp.equipo,this.vp.barrabn);
-        im2 = new Impresora(cola2,this.vp.modeloColor,this.vp.equipo2,this.vp.barracolor);
+        im = new Impresora(cola1,this.vp.modeloIBN,this.vp.totalbn,this.vp.barrabn,this.vp.equipo);
+        im2 = new Impresora(cola2,this.vp.modeloColor,this.vp.totalcolor,this.vp.barracolor,this.vp.equipo2);
         im.setNombre("Blanco y Negro");
         im2.setNombre("Color");
         im.start();
@@ -87,13 +90,11 @@ public class Controlador implements ActionListener{
             ob[4] = 0;
             ob[5] = 0;
             vp.modeloE.addRow(ob);
-           
-            
         }
 
     }
     
-    public int cargarCostoImpresiones(){
+    public void cargarCostoImpresiones(){
         List<Producto> productos = modelo.listProductos("Impresion");
         for(int i = 0; i<productos.size(); i++){
             Producto p = productos.get(i);
@@ -102,8 +103,7 @@ public class Controlador implements ActionListener{
             if(p.getNombre().equals("Impresiones B/N"))
                 impresionBN = p;
         }
-        return JDialog.DISPOSE_ON_CLOSE;
-    }
+}
 
     
 
@@ -114,6 +114,7 @@ public class Controlador implements ActionListener{
         switch(e.getActionCommand()){
             case "iniciar":
                 if(r != -1){
+                cargarCostoImpresiones();
                 if(vp.tablaEquipos.getValueAt(r,1).equals("Disponible")){
                 Cronometro c1 = new Cronometro(cola1,cola2,r,2,vp.modeloE,tarifas[r]); 
                 vp.modeloE.setValueAt("No Disponible",r,1);
@@ -130,6 +131,7 @@ public class Controlador implements ActionListener{
             
             case "detener":
                 if(r != -1){
+                    cargarCostoImpresiones();
                 if(vp.tablaEquipos.getValueAt(r,1).equals("No Disponible")){
                     //System.out.println(vp.tablaEquipos.getValueAt(r,4));
                     impresionBN.setCantidad((int)vp.tablaEquipos.getValueAt(r,4));
@@ -139,12 +141,15 @@ public class Controlador implements ActionListener{
                         c.agregarProducto(impresionBN, impresionBN.getCantidad());
                     if(impresionColor.getCantidad() > 0)
                         c.agregarProducto(impresionColor,impresionColor.getCantidad());
-                    int min = (int)((Double)vp.tablaEquipos.getValueAt(r,3)/tarifas[r]);
+                    
+                    double cantidad = (Double)vp.tablaEquipos.getValueAt(r,3)/tarifas[r];
+                    int min = (int) cantidad;
                     c.agregarProducto(new Producto(0,"Renta de equipo",tarifas[r]),min);
                     VistaVentaSimple vi = new VistaVentaSimple(vp,c); 
-                    vi.setLocationRelativeTo(vi);
-                    ControladorVentaSimple contro = new ControladorVentaSimple(vi);
+                    contro = new ControladorVentaSimple(vi,modelo);
                     vi.conectaControlador(contro);
+                    vi.setModal(true);
+                    vi.setVisible(true);
                     
                     vp.modeloE.setValueAt("Disponible",r,1);
                     vp.modeloE.setValueAt(0.0, r,3);
@@ -162,21 +167,30 @@ public class Controlador implements ActionListener{
                 
             case "vender":
                 VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta()); 
-                ControladorVentaSimple contro = new ControladorVentaSimple(vi);
+                contro = new ControladorVentaSimple(vi,modelo);
                 vi.conectaControlador(contro);
+                vi.setModal(true);
+                vi.setVisible(true);
+                cargarCostoImpresiones();
+                
+                
                 break;
+            
             case "producto":
                 VentanaProductos vpr = new VentanaProductos(vp);
-                vpr.setDefaultCloseOperation(cargarCostoImpresiones());
-                ControladorProductos cp = new ControladorProductos(vpr);
-                vpr.conectaControlador(cp);
-                
-                
+                cproductos = new ControladorProductos(vpr,modelo);
+                vpr.conectaControlador(cproductos);
+                vpr.setModal(true);
+                vpr.setVisible(true);
+                cargarCostoImpresiones();
                 break;
         
         }
     
     }
+    
+    
+    
    
     
 

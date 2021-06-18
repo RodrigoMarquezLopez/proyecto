@@ -59,17 +59,19 @@ public class VistaPrincipal extends JFrame{
     protected JMenuBar barraOpc;
     protected JMenu opciones;
     protected JMenuItem venta;
+    
     protected Tabla colaBn;
     protected Tabla colaColor;
+    
     protected JProgressBar barrabn;
     protected JProgressBar barracolor;
     protected JLabel equipo;
     protected JLabel equipo2;
+    protected JLabel totalbn;
+    protected JLabel totalcolor;
     private   JScrollPane s;
     private   JScrollPane s1;
     protected JLabel usr;
-    protected JLabel totalC;
-    protected JLabel totalB;
     protected BotonPersonalizado ventaN;
     protected BotonPersonalizado confgP;
     
@@ -98,15 +100,6 @@ public class VistaPrincipal extends JFrame{
         usr.setFont(new Font("Arial",Font.BOLD,16));
         usr.setForeground(Color.WHITE);
         usr.setHorizontalAlignment(SwingConstants.LEFT);
-        
-        totalB = new JLabel("Total de Hojas Impresas");
-        totalB.setFont(new Font("Arial",Font.BOLD,16));
-        totalB.setForeground(Color.WHITE);
-        
-        totalC = new JLabel("Total de Hojas Impresas");
-        totalC.setFont(new Font("Arial",Font.BOLD,16));
-        totalC.setForeground(Color.WHITE);
-        
         renta = new BotonPersonalizado();
         renta.setText("RENTAR");
         renta.setIcon(new ImageIcon("src/imagenes/renta.png"));
@@ -188,14 +181,58 @@ public class VistaPrincipal extends JFrame{
         modeloColor = new DefaultTableModel(columnasImp,0);
         colaBn = new Tabla(modeloIBN);
         colaColor = new Tabla(modeloColor);
+        colaBn.setRowHeight(40);
+        colaColor.setRowHeight(40);
         s = new JScrollPane(colaBn);
         s1 = new JScrollPane(colaColor);
-        panelImpresoras.setLayout(new GridLayout(3,0));
+        totalbn = new JLabel();
+        totalcolor = new JLabel();
+        panelImpresoras.setLayout(new BorderLayout());
         panelImpresoras.setBackground(new Color(33, 45, 62, 255));
         
-        panelImpresoras.add(new Titulo("INFORMACION IMPRESORAS"),0);
-        panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",false),1);
-        panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",true),2);
+        Titulo imTit = new Titulo();
+        imTit.setText("INFORMACION IMPRESORAS");
+        imTit.setHorizontalAlignment(SwingConstants.CENTER);
+        panelImpresoras.add(imTit,BorderLayout.NORTH);
+        JPanel panelSubIm = new JPanel();
+        panelSubIm.setOpaque(false);
+        panelSubIm.setLayout(new GridLayout(2,0));
+        
+        panelImpresoras.add(panelSubIm,BorderLayout.CENTER);
+        JPanel z = new JPanel();
+        z.setOpaque(false);
+        z.setLayout(new FlowLayout());
+        
+        totalbn.setForeground(Color.WHITE);
+        totalbn.setFont(new Font("Arial",Font.BOLD,25));
+        totalcolor.setForeground(Color.WHITE);
+        totalcolor.setFont(new Font("Arial",Font.BOLD,25));
+        
+        JLabel aux1 = new JLabel("Total Blanco y Negro : ");
+        aux1.setForeground(Color.WHITE);
+        aux1.setFont(new Font("Arial",Font.BOLD,25));
+        JLabel aux2 = new JLabel("                           Total Color: ");
+        aux2.setForeground(Color.WHITE);
+        aux2.setFont(new Font("Arial",Font.BOLD,25));
+        z.add(aux1);
+        z.add(totalbn);
+        z.add(aux2);
+        z.add(totalcolor);
+        
+        JPanel w = new JPanel();
+        w.setOpaque(false);
+        JPanel y = new JPanel();
+        y.setOpaque(false);
+        
+        panelImpresoras.add(z,BorderLayout.SOUTH);
+        panelImpresoras.add(y,BorderLayout.WEST);
+        panelImpresoras.add(y,BorderLayout.EAST);
+        
+        panelSubIm.add(formarPanelImpresora("src/imagenes/impresorabn.png",false),0);
+        panelSubIm.add(formarPanelImpresora("src/imagenes/impresoracolor.png",true),1);
+        //panelImpresoras.add(new Titulo("INFORMACION IMPRESORAS"),0);
+        //panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",false),1);
+        //panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",true),2);
         
         
         //this.setJMenuBar(barraOpc);
@@ -212,29 +249,54 @@ public class VistaPrincipal extends JFrame{
     
     private JPanel formarPanelImpresora(String url,boolean color){
         JPanel p = new JPanel();
-        p.setLayout(new FlowLayout());
+        p.setLayout(new BorderLayout());
+        JLabel titulo = new JLabel();
+        titulo.setForeground(Color.WHITE);
+        titulo.setFont(new Font("Arial",Font.BOLD,25));
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        p.add(titulo,BorderLayout.NORTH);
+        
+        JPanel imp = new JPanel();
+        imp.setOpaque(false);
+        imp.setLayout(new FlowLayout());
+        
         JLabel imagen = new JLabel(new ImageIcon(url));
-        JLabel siguiente = new JLabel("Siguiente:");
+        JLabel siguiente = new JLabel("Siguiente archivo en la cola : ");
         siguiente.setForeground(Color.WHITE);
         siguiente.setFont(new Font("Arial",Font.BOLD,16));
-        p.add(imagen);
-        if(!color){
-        p.add(barrabn);
+        imp.add(imagen);
+    if(!color){
+        titulo.setText("IMPRESORA BLANCO Y NEGRO");
+        imp.add(barrabn);
         equipo.setForeground(Color.WHITE);
         equipo.setFont(new Font("Arial",Font.BOLD,16));
-        p.add(equipo);
-        p.add(siguiente);
-        s.setPreferredSize(new Dimension(300,50));
-        p.add(s);
-        }else{
-        p.add(barracolor);
+        JLabel qui = new JLabel("Imprimirendo equipo :");
+        qui.setForeground(Color.WHITE);
+        qui.setFont(new Font("Arial",Font.BOLD,16));
+        imp.add(qui);
+        imp.add(equipo);
+        imp.add(siguiente);
+        s.setPreferredSize(new Dimension(400,75));
+        imp.add(s);
+        
+        
+    }else{
+        titulo.setText("IMPRESORA A COLOR");
+        imp.add(barracolor);
         equipo2.setForeground(Color.WHITE);
         equipo2.setFont(new Font("Arial",Font.BOLD,16));
-        p.add(equipo2);
-        p.add(siguiente);
-        s1.setPreferredSize(new Dimension(300,50));
-        p.add(s1);
-        }
+        JLabel qui = new JLabel("Imprimirendo equipo :");
+        qui.setForeground(Color.WHITE);
+        qui.setFont(new Font("Arial",Font.BOLD,16));
+        imp.add(qui);
+        imp.add(equipo2);
+        imp.add(siguiente);
+        s1.setPreferredSize(new Dimension(400,75));
+        imp.add(s1);
+    }
+        
+    
+        p.add(imp,BorderLayout.CENTER);
         p.setOpaque(false);
         return p;
     }

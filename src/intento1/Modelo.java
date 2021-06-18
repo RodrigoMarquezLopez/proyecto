@@ -171,10 +171,10 @@ public class Modelo {
         }
     }
     
-         public boolean updateCliente(Producto c){
+public boolean updateProducto(Producto c){
         //Objeto para ejecutar los procedimientos almacenados en la base de datos
         PreparedStatement ps;
-        String sqlUpdateCliente = "update productos set precio = ? where id_producto = ?;";
+        String sqlUpdateCliente = "update productos set precio = (?) where id_producto = (?);";
         try{
             //Preparar la llamada
             ps  = getConexion().prepareStatement(sqlUpdateCliente);
@@ -192,7 +192,38 @@ public class Modelo {
             return false;
         }
     }
+
+public boolean deleteProducto(int p){
+        //Objeto para ejecutar los procedimientos almacenados en la base de datos
+        PreparedStatement ps;
+        String sqlUpdateCliente = "DELETE FROM productos WHERE id_producto = "+p+";";
+        try{
+            //Preparar la llamada
+            ps  = getConexion().prepareStatement(sqlUpdateCliente);
+                
+            //Ejecutar el procedimiento
+            ps.executeUpdate();
+            //System.out.println(this.view.dtm.getValueAt(filaPulsada, 0));
+            return true;
+        }catch (SQLException e) {
+            //System.err.println("Error en la MODIFICACION");
+            return false;
+        }
+    }
+
      
+         
+    public void closeConexion(){
+           // verifica que la conexión esté activa
+        if ( getConexion() != null){
+            try {
+                getConexion().close();
+                System.out.println("Conexion Cerrada");
+            } catch(SQLException e){
+                System.err.println("Error al cerrar la bd "+ e);
+            }
+        }
+    }     
      
     
     

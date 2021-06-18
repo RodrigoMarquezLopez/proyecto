@@ -25,10 +25,12 @@ public class Impresora extends Thread{
     DefaultTableModel dt1;
     LinkedList<Impresion> contenidoCola;
     JLabel equipo;
+    JLabel total;
     JProgressBar barra;
        //Tabla tabla;
-   public Impresora(ColaImpresiones cola,DefaultTableModel dtm,JLabel equipo, JProgressBar barra){
+   public Impresora(ColaImpresiones cola,DefaultTableModel dtm,JLabel total, JProgressBar barra,JLabel equipo){
        super();
+        this.total = total;
         this.equipo = equipo;
         this.barra = barra;
         this.cola = cola;
@@ -41,12 +43,14 @@ public class Impresora extends Thread{
    public void run(){
        while(1 == 1){
        Impresion c = cola.imprimir();
-       equipo.setText("Imprimirendo equipo :"+c.getEquipo());
+       equipo.setText(""+c.getEquipo());
        barra.setValue(0);
        this.cola.numero ++;
        int suma = 100/c.getCantidad();
        for(int i = 0;i<c.getCantidad();i++){
           System.out.println(nombre +"  Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
+          total.setText(""+cola.numero);
+          cola.numero++;
           barra.setValue(barra.getValue()+suma);
            if(!cola.cola.isEmpty()){
        Object [] ob = new Object[2];

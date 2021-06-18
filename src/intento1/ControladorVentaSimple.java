@@ -13,6 +13,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -32,8 +34,8 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
     private Cuenta cuenta;
    // private VistaCuenta vc;
     
-    public ControladorVentaSimple (VistaVentaSimple vs){
-        modelo = new Modelo("proyecto");
+    public ControladorVentaSimple (VistaVentaSimple vs,Modelo m){
+        modelo = m;
         this.ventanaSimple = vs;
         cargarCuenta();
         cargarTabla(); 
@@ -129,14 +131,14 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             case "cuenta":
                 
                 try{
-                if(!ventanaSimple.recibido.getText().equals("")&&cuenta.getTotal()< Double.parseDouble(ventanaSimple.recibido.getText())){
+                if(!ventanaSimple.recibido.getText().equals("")&&cuenta.getTotal() <= Double.parseDouble(ventanaSimple.recibido.getText())){
                 ventanaSimple.cambio.setText("Cambio :    $"+String.format("%.2f",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal()));
                 JDialog vCuenta = new JDialog(ventanaSimple);
-                vCuenta.setLocationRelativeTo(null);
+                
+                vCuenta.setLocationRelativeTo(ventanaSimple);
                 JTextArea cuent = new JTextArea();
                 vCuenta.setTitle("TICKET");
                 vCuenta.add(cuent);
-                vCuenta.setVisible(true);
                 vCuenta.setResizable(false);
                 cuent.setFont(new Font("Arial",Font.BOLD,16));
                 vCuenta.setSize(500,500);
@@ -146,6 +148,8 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 cuent.updateUI();
                 cuent.setEditable(false);
                 cuent.repaint();
+                vCuenta.setModal(true);
+                vCuenta.setVisible(true);
                 ventanaSimple.busqueda.setText(ventanaSimple.rBuqueda);
                 cuenta = new Cuenta();
                 aux = new ArrayList<Object[]>();
@@ -160,6 +164,9 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                     JOptionPane.showMessageDialog(ventanaSimple,"Entrada no valida");
                     ventanaSimple.recibido.setText("");
                 }
+                ventanaSimple.recibido.setText("");
+                ventanaSimple.total.setText("Total :   $0.0");
+                ventanaSimple.cambio.setText("Cambio :    ");
                 break;
         
         }

@@ -137,13 +137,13 @@ public class VentanaProductos extends JDialog{
        principal2.setOpaque(false);
        principal.add(principal2,1);
        
-       this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-       this.setVisible(true);
        this.setSize(new Dimension(800,700));
-       //this.setResizable(false);
-       this.setLocationRelativeTo(null);
-       this.setFocusableWindowState(true);
-       this.setModal(true);
+       //this.setModal(true);
+       
+       this.setResizable(false);
+       this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+       
+       
     
     
     }
@@ -267,13 +267,20 @@ public class VentanaProductos extends JDialog{
         guardar.addActionListener(c);
         agregar.setActionCommand("agregar");
         agregar.addActionListener(c);
-    
+        find.setActionCommand("buscar");
+        find.addActionListener(c);
+        precioN.addKeyListener(c);
+        id.addKeyListener(c);
+        aceptar.setActionCommand("aceptar");
+        aceptar.addActionListener(c);
+        eliminar.setActionCommand("eliminar");
+        eliminar.addActionListener(c);
     }
     
  
     public static void main(String[] args) {
         VentanaProductos vp = new VentanaProductos(null);
-        ControladorProductos c = new ControladorProductos(vp);
+        ControladorProductos c = new ControladorProductos(vp,new Modelo("proyecto"));
         vp.conectaControlador(c);
     }
 }

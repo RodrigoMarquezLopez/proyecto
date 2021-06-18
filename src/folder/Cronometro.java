@@ -24,6 +24,8 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
     private int nBn;
     private int col;
     private double costo;
+    private int rHojas;
+    private boolean rImpresora;
     
     public Cronometro(ColaImpresiones bn,ColaImpresiones color,int row, int column, AbstractTableModel dtm,Double tarifa){// Contructor porque la clase es heredada 
         super();
@@ -38,6 +40,8 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
         dtm.setValueAt(costo,row,3);
         this.bn = bn;
         this.color = color;
+        int rHojas = 0;
+       
     }
     @Override
     public void run() {
@@ -53,24 +57,21 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
                         nuSeg=0;//pongo en cero los segundos 
                         nuMin++;//incremento el numero de minutos
                         dtm.setValueAt(costo*(nuMin+1),row,3);
-                        double random = 0.7;
-                            if(random > 0.4899){
-                                if(random > 0.65){
-                                Impresion i = new Impresion(3,"Impresiones B/N",0.95,(row+1));
-                                i.setCantidad(nuMin*10);
-                                nBn = nBn + i.getCantidad();
-                                dtm.setValueAt(nBn,row,4);
-                                bn.enviarImprimir(i);
-                                
-                                }else{
-                                Impresion i = new Impresion(3,"Impresiones color",2.5,(row+1));
-                                i.setCantidad(nuMin*10);
-                                col = col + i.getCantidad();
-                                dtm.setValueAt(col,row,5);
-                                color.enviarImprimir(i);
-                                }
-                               
+                        if(randoms()){
+                            if(rImpresora){
+                            Impresion i = new Impresion(3,"Impresiones B/N",0.0,(row+1));
+                            i.setCantidad(rHojas);
+                            nBn = nBn + i.getCantidad();
+                            dtm.setValueAt(nBn,row,4);
+                            bn.enviarImprimir(i);
+                            }else{
+                            Impresion i = new Impresion(4,"Impresiones color",0.0,(row+1));
+                            i.setCantidad(rHojas);
+                            col = col + i.getCantidad();
+                            dtm.setValueAt(col,row,5);
+                            color.enviarImprimir(i);
                             }
+                        }
                                 
                     }else{//incremento el numero de horas
                             nuHora++;
@@ -82,14 +83,29 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
                 dtm.setValueAt(nuHora+":"+nuMin+":"+nuSeg,row,column);
                 //System.out.println(tiempo);
                 //System.out.println(nuHora+":"+nuMin+":"+nuSeg+" "+fila+" "+columna);
-            sleep(997);//Duermo el hilo durante 999 milisegundos(casi un segundo, quintandole el tiempo de proceso)
+            sleep(100);//Duermo el hilo durante 999 milisegundos(casi un segundo, quintandole el tiempo de proceso)
             }
             dtm.setValueAt("0:0:0", row, column);
             return;//Fin del for infinito             
         } catch (Exception ex) {
              System.out.println(ex.getMessage());//Imprima el error
         }                 
- } 
+ }
+    
+public boolean randoms(){
+    double imprimir = Math.random();
+    if(imprimir > 0.4999){
+        this.rImpresora  = (Math.random() < 0.5);
+        this.rHojas = (int)(Math.random()*15);
+        this.rHojas++;
+         return true;
+    }
+    return false;
+}    
+    
+ 
+    
+    
  public static void main(String[] args) {
          //Ejecuto el metodo run del Thread        
     }// Fin main
