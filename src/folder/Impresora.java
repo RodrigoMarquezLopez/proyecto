@@ -45,12 +45,12 @@ public class Impresora extends Thread{
        Impresion c = cola.imprimir();
        equipo.setText(""+c.getEquipo());
        barra.setValue(0);
-       this.cola.numero ++;
        int suma = 100/c.getCantidad();
        for(int i = 0;i<c.getCantidad();i++){
           System.out.println(nombre +"  Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
-          total.setText(""+cola.numero);
           cola.numero++;
+          total.setText(""+cola.numero);
+          //cola.numero++;
           barra.setValue(barra.getValue()+suma);
            if(!cola.cola.isEmpty()){
        Object [] ob = new Object[2];
@@ -60,18 +60,16 @@ public class Impresora extends Thread{
            for(int j = 0 ; j < dtm.getRowCount(); j++){
                dtm.removeRow(j);
            }
-       
-       }
+      }
        dtm.addRow(ob);
      }else if(dtm.getRowCount() > 0){
          dtm.removeRow(0);
-           
            }
          try{  
            Thread.sleep(2500);
          }catch(InterruptedException e){}
-            
         }
+       barra.setValue(0);
        }
    }
    

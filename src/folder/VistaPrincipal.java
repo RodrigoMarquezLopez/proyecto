@@ -56,10 +56,6 @@ public class VistaPrincipal extends JFrame{
     protected DefaultTableModel modeloColor;
     protected BotonPersonalizado renta;
     protected BotonPersonalizado detener;
-    protected JMenuBar barraOpc;
-    protected JMenu opciones;
-    protected JMenuItem venta;
-    
     protected Tabla colaBn;
     protected Tabla colaColor;
     
@@ -72,12 +68,13 @@ public class VistaPrincipal extends JFrame{
     private   JScrollPane s;
     private   JScrollPane s1;
     protected JLabel usr;
+    protected final String usuario;
     protected BotonPersonalizado ventaN;
     protected BotonPersonalizado confgP;
     
-    public  VistaPrincipal(){
+    public  VistaPrincipal(String usuario){
         JTabbedPane panelPrincipal = new JTabbedPane();
-        
+        this.usuario = usuario;
         panelEquipos = new JPanel();
         panelImpresoras = new JPanel();
         panelPrincipal.add(panelEquipos);
@@ -86,92 +83,116 @@ public class VistaPrincipal extends JFrame{
         panelPrincipal.setTitleAt(1,"Estado Impresoras");
         add(panelPrincipal);
         
-         panelEquipos.setLayout(new BorderLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        panelEquipos.setLayout(new BorderLayout());
         panelEquipos.setBackground(new Color(33, 45, 62, 255));
         modeloE = new DefaultTableModel(columnas,0);
         tablaEquipos = new Tabla(modeloE);
         tablaEquipos.setRowHeight(100);
         JScrollPane sp = new JScrollPane(tablaEquipos);
-        sp.setPreferredSize(new Dimension(900,500));
-        usr = new JLabel("Raaaaaaaaaaaamon");
+       // sp.setPreferredSize(new Dimension(900,500));
+        
+        
+        usr = new JLabel("USUARIO :  "+this.usuario);
         usr.setOpaque(false);
         usr.setIcon(new ImageIcon("src/imagenes/usuario.png"));
         usr.setFont(new Font("Arial",Font.BOLD,16));
         usr.setForeground(Color.WHITE);
         usr.setHorizontalAlignment(SwingConstants.LEFT);
+        
+        JPanel norte = new JPanel();
+        norte.setLayout(new BorderLayout());
+        norte.setOpaque(false);
+        norte.add(usr,BorderLayout.NORTH);
+        Titulo tituloEquipos = new Titulo();
+        tituloEquipos.setIcon(new ImageIcon("src/imagenes/logo2.png"));
+        tituloEquipos.setText("SIMULADOR DE CIBER");
+        tituloEquipos.setHorizontalAlignment(SwingConstants.CENTER);
+        norte.add(tituloEquipos,BorderLayout.CENTER);
+        panelEquipos.add(norte,BorderLayout.NORTH);
+        
         renta = new BotonPersonalizado();
         renta.setText("RENTAR");
         renta.setIcon(new ImageIcon("src/imagenes/renta.png"));
         detener = new BotonPersonalizado();
         detener.setText("DETENER");
+        detener.setIcon(new ImageIcon("src/imagenes/detener.png"));
         ventaN = new BotonPersonalizado();
         ventaN.setText("VENDER");
+        ventaN.setIcon(new ImageIcon("src/imagenes/vender.png"));
         confgP = new BotonPersonalizado();
         confgP.setText("CONFIGURACION PRODUCTOS");
-        
-        JPanel top = new JPanel();
-        top.setLayout(new FlowLayout());
-        JLabel lg = new JLabel(new ImageIcon("src/imagenes/logo.png"));
-        Titulo titulo = new Titulo(" SIMULADOR DE CIBER");
-        top.setOpaque(false);
-        top.add(lg);
-        top.add(titulo);
+        confgP.setIcon(new ImageIcon("src/imagenes/config.png"));
         
         JPanel centro = new JPanel();
+        centro.setLayout(new BorderLayout());
         centro.setOpaque(false);
-        centro.setLayout(new GridBagLayout());
+            JPanel tpc = new JPanel();
+            tpc.setLayout(new FlowLayout());
+            tpc.setOpaque(false);
+            tpc.add(ventaN);
+            JPanel b1 = new JPanel();
+            b1.setOpaque(false);
+            b1.setPreferredSize(new Dimension(200,100));
+            tpc.add(b1);
+            tpc.add(confgP);
+        centro.add(tpc,BorderLayout.NORTH);
+        centro.add(sp,BorderLayout.CENTER);
+        JPanel a1 = new JPanel();
+        JPanel a2 = new JPanel();
+        a1.setOpaque(false);
+        a2.setOpaque(false);
+        a2.setPreferredSize(new Dimension(150,150));
+        a1.setPreferredSize(new Dimension(20,20));
+        centro.add(a1,BorderLayout.EAST);
+        //centro.add(a2,BorderLayout.WEST);
+        JPanel cc = new JPanel();
+            cc.setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 1;
+            gbc.gridheight = 1;
+            cc.setOpaque(false);
+            cc.add(renta,gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            gbc.gridwidth = 1;
+            gbc.gridheight = 1;
+            JPanel a3 = new JPanel();
+            a3.setPreferredSize(new Dimension(100,100));
+            a3.setOpaque(false);
+            cc.add(a3,gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.gridwidth = 1;
+            gbc.gridheight = 1;
+            cc.add(detener,gbc);
+            JPanel a4 = new JPanel();
+            a4.setOpaque(false);
+            a4.setPreferredSize(new Dimension(150,150));
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            gbc.gridwidth = 1;
+            gbc.gridheight = 3;
+            cc.add(a4,gbc);
         
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        centro.add(ventaN,gbc);
-        
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        centro.add(usr,gbc);
-        
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        centro.add(confgP,gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 3;
-        gbc.gridheight = 4;
-        gbc.fill = GridBagConstraints.REMAINDER;
-        centro.add(sp,gbc);
-        
-        gbc.gridx = 4;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 2;
-        gbc.fill = GridBagConstraints.CENTER;
-        JPanel der = new JPanel();
-        FlowLayout fl = new FlowLayout(FlowLayout.RIGHT);
-        fl.setHgap(50);
-        fl.setVgap(200);
-        
-        der.setLayout(fl);
-        der.setOpaque(false);
-        renta.setHorizontalAlignment(SwingConstants.CENTER);
-        der.add(renta,BorderLayout.NORTH);
-        der.add(detener,BorderLayout.SOUTH);
-        centro.add(der,gbc);
-        
-        
-        
-        
-        panelEquipos.add(top,BorderLayout.NORTH);
+       JPanel sur = new JPanel();
+            sur.setOpaque(false);
+            sur.setLayout(new BorderLayout());
+        JLabel abc = new JLabel();
+        abc.setIcon(new ImageIcon("src/imagenes/inferior.png"));
+        abc.setFont(new Font("Arial Black",Font.ITALIC,20));
+        abc.setText("Todos los derechos reservados. 2021");
+        abc.setForeground(Color.WHITE);
+        abc.setHorizontalAlignment(SwingConstants.CENTER);
+        //abc.setVerticalAlignment(SwingConstants.);
+        sur.add(abc,BorderLayout.CENTER);
+        sur.setPreferredSize(new Dimension(200,200));
+        panelEquipos.add(sur,BorderLayout.SOUTH);
+        //centro.add(cc,BorderLayout.EAST);
         panelEquipos.add(centro,BorderLayout.CENTER);
+        panelEquipos.add(cc,BorderLayout.EAST);
+        panelEquipos.add(a2,BorderLayout.WEST);
         //
         barrabn = new JProgressBar();
         barracolor = new JProgressBar();
@@ -308,7 +329,7 @@ public class VistaPrincipal extends JFrame{
     }
     
     public static void main(String[] args) {
-        VistaPrincipal vp = new VistaPrincipal();
+        VistaPrincipal vp = new VistaPrincipal("RAMON");
         Controlador c = new Controlador(vp);
         vp.conectControlador(c);
     }

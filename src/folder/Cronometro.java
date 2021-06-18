@@ -96,9 +96,8 @@ public boolean randoms(){
     double imprimir = Math.random();
     if(imprimir > 0.4999){
         this.rImpresora  = (Math.random() < 0.5);
-        this.rHojas = (int)(Math.random()*15);
-        this.rHojas++;
-         return true;
+        this.rHojas = ((int)(Math.random()*15))+1;
+        return true;
     }
     return false;
 }    

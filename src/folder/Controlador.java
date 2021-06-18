@@ -156,7 +156,7 @@ public class Controlador implements ActionListener,WindowListener{
                     cantidad = cantidad/tarifas[r];
                     int min = (int) cantidad;
                     c.agregarProducto(new Producto(0,"Renta de equipo",tarifas[r]),min);
-                    VistaVentaSimple vi = new VistaVentaSimple(vp,c,vp.usr.getText()); 
+                    VistaVentaSimple vi = new VistaVentaSimple(vp,c,vp.usuario); 
                     contro = new ControladorVentaSimple(vi,modelo);
                     vi.conectaControlador(contro);
                     vi.setModal(true);
@@ -173,7 +173,7 @@ public class Controlador implements ActionListener,WindowListener{
                 break;
                 
             case "vender":
-                VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta(),vp.usr.getText()); 
+                VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta(),vp.usuario); 
                 contro = new ControladorVentaSimple(vi,modelo);
                 vi.conectaControlador(contro);
                 vi.setModal(true);

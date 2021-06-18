@@ -47,7 +47,7 @@ public class Cuenta{
             return "";
         for(int i = 0; i < contenido.size();i++){
                                   
-            s = s + String.format("      %2d      %s                     %.2f         %.2f\n",contenido.get(i).getCantidad(),
+            s = s + String.format("  %2d  %16s         %1.2f    %2.2f\n",contenido.get(i).getCantidad(),
                     contenido.get(i).getNombre(),contenido.get(i).getPrecio(),(Double)(contenido.get(i).getCantidad()*contenido.get(i).getPrecio()));
         }
         s = s + String.format(    "\n    TOTAL:.......................................%.2f",total);

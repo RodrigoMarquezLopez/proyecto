@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class ColaImpresiones {
     protected Queue <Impresion> cola;
     protected DefaultTableModel dtm;
-    protected static int numero;
+    protected int numero;
     
     public ColaImpresiones(){
         cola = new LinkedList<Impresion>();
