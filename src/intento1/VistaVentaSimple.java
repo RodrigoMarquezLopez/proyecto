@@ -53,10 +53,12 @@ public class VistaVentaSimple extends JDialog{
     protected BotonPersonalizado generaCuenta;
     protected final String rBuqueda = "Ingresa busqueda";
     protected JLabel total;
+    protected String usr;
     
-    public VistaVentaSimple(JFrame f,Cuenta as){
+    public VistaVentaSimple(JFrame f,Cuenta as,String usr){
         super(f);
         cuentaAs = as;
+        this.usr = usr;
         this.setLayout(new BorderLayout());
         Titulo titulo = new Titulo("VENTA");
         titulo.setOpaque(false);

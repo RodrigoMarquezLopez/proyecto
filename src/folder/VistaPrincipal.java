@@ -230,17 +230,10 @@ public class VistaPrincipal extends JFrame{
         
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresorabn.png",false),0);
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresoracolor.png",true),1);
-        //panelImpresoras.add(new Titulo("INFORMACION IMPRESORAS"),0);
-        //panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",false),1);
-        //panelImpresoras.add(formarPanelImpresora("src/imagenes/computer.png",true),2);
-        
-        
-        //this.setJMenuBar(barraOpc);
-        this.setVisible(true);
+         this.setVisible(true);
         this.setSize(1350,950);
         this.setLocationRelativeTo(null);
-        //this.setVisible(true);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         
     
@@ -311,6 +304,7 @@ public class VistaPrincipal extends JFrame{
         ventaN.addActionListener(c);
         confgP.setActionCommand("producto");
         confgP.addActionListener(c);
+        this.addWindowListener(c);
     }
     
     public static void main(String[] args) {

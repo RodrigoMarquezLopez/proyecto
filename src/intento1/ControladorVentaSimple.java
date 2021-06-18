@@ -142,9 +142,10 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 vCuenta.setResizable(false);
                 cuent.setFont(new Font("Arial",Font.BOLD,16));
                 vCuenta.setSize(500,500);
-                cuent.setText(cuenta.toString()+"\nRecibido  : "+
-                Double.parseDouble(ventanaSimple.recibido.getText())+"\nCambio entregado  : "+
-                String.format("%.2f",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal()));
+                String ic = String.format(    "\n    RECIBIDO:.......................................%.2f",Double.parseDouble(ventanaSimple.recibido.getText()));
+                ic = ic +   String.format(    "\n    CAMBIO ENTREGADO:...............................%.2f\n",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal());
+                ic = ic + "  ATENDIO :"+ventanaSimple.usr;
+                cuent.setText(cuenta.toString()+ic);
                 cuent.updateUI();
                 cuent.setEditable(false);
                 cuent.repaint();
@@ -157,16 +158,18 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 this.ventanaSimple.tablaC.updateUI();
                 ventanaSimple.generaCuenta.setEnabled(false);
                 
+                ventanaSimple.total.setText("Total :   $0.0");
+                ventanaSimple.cambio.setText("Cambio :    ");
+                
                 }else{
                     JOptionPane.showMessageDialog(ventanaSimple,"No es suficiente dinero");
+                    ventanaSimple.recibido.setText("");
                 }
                 }catch(NumberFormatException exc){
                     JOptionPane.showMessageDialog(ventanaSimple,"Entrada no valida");
                     ventanaSimple.recibido.setText("");
                 }
-                ventanaSimple.recibido.setText("");
-                ventanaSimple.total.setText("Total :   $0.0");
-                ventanaSimple.cambio.setText("Cambio :    ");
+                
                 break;
         
         }

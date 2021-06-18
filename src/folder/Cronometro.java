@@ -46,7 +46,7 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
     @Override
     public void run() {
     int nuMin=0; //El Contador de minutos
-    int nuSeg=55; //El Contador de de segundos
+    int nuSeg=0; //El Contador de de segundos
     int nuHora=0; //El Contador de Horas   
         try {//si ocurre un error al dormir el proceso(sleep(999))
             while(dtm.getValueAt(row,1).equals("No Disponible")){ //inicio del for infinito           

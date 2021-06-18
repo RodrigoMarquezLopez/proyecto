@@ -52,8 +52,9 @@ import javax.swing.JTable;
  */
 public class Prueba1 {
     public static void main(String[] args){
-       VistaVentaSimple vi = new VistaVentaSimple(null,new Cuenta()); 
-       //ControladorVentaSimple c = new ControladorVentaSimple(vi);
-       //vi.conectaControlador(c);
+       VistaVentaSimple vi = new VistaVentaSimple(null,new Cuenta(),"RODRIGO"); 
+       ControladorVentaSimple c = new ControladorVentaSimple(vi,new Modelo("proyecto"));
+       vi.conectaControlador(c);
+       vi.setVisible(true);
     }
 }

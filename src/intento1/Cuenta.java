@@ -20,9 +20,11 @@ public class Cuenta{
     public Cuenta(){
         total = 0.0;
         contenido = new ArrayList<Producto>();
-        encabezado = "            --------SIMULADOR CIBER--------\n"+
-                     "     Calle Aldama San Felipe del Agua Oax. 77, \n"+""
-                + "    San FELIPE, Centro, 71290 Oaxaca de Juárez, Oax.";
+        encabezado = "  ------------------- SIMULADOR CIBER ---------------------- \n"+
+                     "           Calle Aldama San Felipe del Agua Oax. 77,        \n"
+                +    "      San FELIPE, Centro, 71290 Oaxaca de Juárez, Oax.      \n"+
+                     "_____________________________________________________________\n"+
+                     " | CANTIDAD |       NOMBRE      | PRECIO UNI.|   SUBTOTAL  |  \n";
        
     }
     
@@ -44,10 +46,11 @@ public class Cuenta{
         if(contenido.size()==0)
             return "";
         for(int i = 0; i < contenido.size();i++){
-            s = s + contenido.get(i).getCantidad() + "   "+contenido.get(i).getNombre()+"      "+contenido.get(i).getPrecio()+"   "
-                    +contenido.get(i).getCantidad()*contenido.get(i).getPrecio()+"\n";
+                                  
+            s = s + String.format("      %2d      %s                     %.2f         %.2f\n",contenido.get(i).getCantidad(),
+                    contenido.get(i).getNombre(),contenido.get(i).getPrecio(),(Double)(contenido.get(i).getCantidad()*contenido.get(i).getPrecio()));
         }
-        s = s + "Total:     "+total;
+        s = s + String.format(    "\n    TOTAL:.......................................%.2f",total);
         return s;
     
     }

@@ -12,12 +12,16 @@ import intento1.Modelo;
 import intento1.Producto;
 import intento1.VentanaProductos;
 import intento1.VistaVentaSimple;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -26,6 +30,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,7 +43,7 @@ import javax.swing.table.TableModel;
  *
  * @author rodri
  */
-public class Controlador implements ActionListener{
+public class Controlador implements ActionListener,WindowListener{
     private Modelo modelo;
     private VistaPrincipal vp;
     private ColaImpresiones cola1;
@@ -133,28 +138,30 @@ public class Controlador implements ActionListener{
                 if(r != -1){
                     cargarCostoImpresiones();
                 if(vp.tablaEquipos.getValueAt(r,1).equals("No Disponible")){
-                    //System.out.println(vp.tablaEquipos.getValueAt(r,4));
-                    impresionBN.setCantidad((int)vp.tablaEquipos.getValueAt(r,4));
-                    impresionColor.setCantidad((int)vp.tablaEquipos.getValueAt(r,5));
+                    vp.modeloE.setValueAt("Disponible",r,1);
+                    double cantidad = (Double)vp.tablaEquipos.getValueAt(r,3);
+                    int bln = (Integer)vp.tablaEquipos.getValueAt(r,4);
+                    int clr = (Integer)vp.tablaEquipos.getValueAt(r,5);
+                    vp.modeloE.setValueAt(0.0, r,3);
+                    vp.modeloE.setValueAt(0,r,4);
+                    vp.modeloE.setValueAt(0,r,5);
+                    impresionBN.setCantidad(bln);
+                    impresionColor.setCantidad(clr);
                     Cuenta c = new Cuenta();
                     if(impresionBN.getCantidad() > 0)
                         c.agregarProducto(impresionBN, impresionBN.getCantidad());
                     if(impresionColor.getCantidad() > 0)
                         c.agregarProducto(impresionColor,impresionColor.getCantidad());
                     
-                    double cantidad = (Double)vp.tablaEquipos.getValueAt(r,3)/tarifas[r];
+                    cantidad = cantidad/tarifas[r];
                     int min = (int) cantidad;
                     c.agregarProducto(new Producto(0,"Renta de equipo",tarifas[r]),min);
-                    VistaVentaSimple vi = new VistaVentaSimple(vp,c); 
+                    VistaVentaSimple vi = new VistaVentaSimple(vp,c,vp.usr.getText()); 
                     contro = new ControladorVentaSimple(vi,modelo);
                     vi.conectaControlador(contro);
                     vi.setModal(true);
                     vi.setVisible(true);
                     
-                    vp.modeloE.setValueAt("Disponible",r,1);
-                    vp.modeloE.setValueAt(0.0, r,3);
-                    vp.modeloE.setValueAt(0,r,4);
-                    vp.modeloE.setValueAt(0,r,5);
                 }else if(vp.tablaEquipos.getValueAt(r,1).equals("Disponible")){
                     JOptionPane.showMessageDialog(vp,"El equipo no se ha rentado");
                 }
@@ -166,7 +173,7 @@ public class Controlador implements ActionListener{
                 break;
                 
             case "vender":
-                VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta()); 
+                VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta(),vp.usr.getText()); 
                 contro = new ControladorVentaSimple(vi,modelo);
                 vi.conectaControlador(contro);
                 vi.setModal(true);
@@ -188,6 +195,53 @@ public class Controlador implements ActionListener{
         }
     
     }
+    
+
+    
+    public void confirmarSalida(){
+        /**JLabel msg = new JLabel("¿Seguro que quiere salir?");
+        msg.setBackground(new Color(33, 45, 62, 255));
+        msg.setOpaque(true);
+        msg.setForeground(Color.WHITE);
+        msg.setFont(new Font("Arial",Font.BOLD,18));
+        * **/
+        int valor = JOptionPane.showConfirmDialog(vp,"¿Seguro que quiere salir?");
+        if(valor == JOptionPane.YES_OPTION){
+            modelo.closeConexion();
+            System.exit(0);
+        }
+    }
+    
+    
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        confirmarSalida();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+     }
     
     
     
