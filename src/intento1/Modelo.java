@@ -223,8 +223,91 @@ public boolean deleteProducto(int p){
                 System.err.println("Error al cerrar la bd "+ e);
             }
         }
-    }     
-     
+    } 
+
+
+public List<Object[]> listVentas(String busqueda){
+        PreparedStatement ps;
+        //Objeto para recoger los datos devueltos
+        ResultSet rs;
+
+        //Obtener datos de todos los clientes
+        String consultaSQL = "SELECT id,monto FROM ventas WHERE fecha = '"+busqueda+"';";
+        // Objeto List que contendrá todos los clientes
+        List<Object [] > ventas = new ArrayList<Object[]>();
+        try {
+            //Preparar el statement con la consulta SQL
+            ps  = getConexion().prepareStatement(consultaSQL);
+                      
+            //Ejecutarla y obtiene en rs el resultado
+            rs  = ps.executeQuery();
+            
+            //Recorrer el resultado para crear instancias de Cliente
+            while(rs.next()){
+                Object [] o = new Object[2];
+                o[0] =  rs.getInt(1);
+                o[1] =  rs.getDouble(2);
+                ventas.add(o);
+            }
+ 
+        } catch (SQLException e) {
+            System.err.println("Error al CARGAR DATOS " + e);
+        }
+        return ventas;
+    }
+public String ticket(int id){
+        PreparedStatement ps;
+        //Objeto para recoger los datos devueltos
+        ResultSet rs;
+
+        //Obtener datos de todos los clientes
+        String consultaSQL = "SELECT ticket FROM ventas WHERE id = "+id+";";
+       String s = "";        
+// Objeto List que contendrá todos los clientes
+        List<Object [] > ventas = new ArrayList<Object[]>();
+        try {
+            //Preparar el statement con la consulta SQL
+            ps  = getConexion().prepareStatement(consultaSQL);
+                      
+            //Ejecutarla y obtiene en rs el resultado
+            rs  = ps.executeQuery();
+            s = "";
+            //Recorrer el resultado para crear instancias de Cliente
+            while(rs.next()){
+                s = rs.getString(1);
+            }
+ 
+        } catch (SQLException e) {
+            System.err.println("Error al CARGAR DATOS " + e);
+        }
+        return s;
+    }    
+
+
+
+
+
+
+    public boolean insertVenta(Object [] o){
+        //Objeto para ejecutar las instrucciones en la base de datos
+        PreparedStatement ps;
+        String sqlInsertCliente = "insert into ventas (fecha,monto,ticket) values (?,?,?);";
+        try{
+            //Preparar la instrucción
+            ps  = getConexion().prepareStatement(sqlInsertCliente);
+            //Indicar qué información se pasa al Statement
+            ps.setString(1,(String)o[0]);
+            ps.setDouble(2, (Double)o[1]);
+            ps.setString(3,(String)o[2]);
+            
+            //Ejecutar el comando insert
+            ps.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            System.err.println("Error en la INSERCIÓN " + e );
+            return false;
+        }
+    }  
     
     
     

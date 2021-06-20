@@ -5,12 +5,14 @@
  */
 package folder;
 
+import intento1.ControladorDatosVenta;
 import intento1.ControladorProductos;
 import intento1.ControladorVentaSimple;
 import intento1.Cuenta;
 import intento1.Modelo;
 import intento1.Producto;
 import intento1.VentanaProductos;
+import intento1.VistaDatosVenta;
 import intento1.VistaVentaSimple;
 import java.awt.Color;
 import java.awt.Component;
@@ -55,6 +57,7 @@ public class Controlador implements ActionListener,WindowListener{
     private Producto impresionBN;
     private ControladorVentaSimple contro;
     private ControladorProductos cproductos;
+    private ControladorDatosVenta cdv;
 
     
     public  Controlador(VistaPrincipal vp) {
@@ -152,10 +155,12 @@ public class Controlador implements ActionListener,WindowListener{
                         c.agregarProducto(impresionBN, impresionBN.getCantidad());
                     if(impresionColor.getCantidad() > 0)
                         c.agregarProducto(impresionColor,impresionColor.getCantidad());
-                    
                     cantidad = cantidad/tarifas[r];
                     int min = (int) cantidad;
-                    c.agregarProducto(new Producto(0,"Renta de equipo",tarifas[r]),min);
+                    if(tarifas[r] == 0.5)
+                    c.agregarProducto(new Producto(0,"Renta de comp.",tarifas[r]),min);
+                    else
+                    c.agregarProducto(new Producto(0,"Renta de tableta",tarifas[r]),min);    
                     VistaVentaSimple vi = new VistaVentaSimple(vp,c,vp.usuario); 
                     contro = new ControladorVentaSimple(vi,modelo);
                     vi.conectaControlador(contro);
@@ -190,6 +195,13 @@ public class Controlador implements ActionListener,WindowListener{
                 vpr.setModal(true);
                 vpr.setVisible(true);
                 cargarCostoImpresiones();
+                break;
+            case "dVentas":
+                VistaDatosVenta vdv = new VistaDatosVenta(vp);
+                cdv = new ControladorDatosVenta(vdv,modelo);
+                vdv.ConectaControlador(cdv);
+                vdv.setModal(true);
+                vdv.setVisible(true);
                 break;
         
         }

@@ -15,7 +15,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JDialog;
@@ -146,6 +149,15 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 ic = ic +   String.format(    "\n    CAMBIO ENTREGADO:...............................%.2f\n",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal());
                 ic = ic + "  ATENDIO :"+ventanaSimple.usr;
                 cuent.setText(cuenta.toString()+ic);
+                    //Conexion a base de datos
+                    Object [] o = new Object[3];
+                    SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
+                    ff.format(new Date());
+                    o[0] = ff.format(new Date());
+                    o[1] =  cuenta.getTotal();
+                    o[2] = cuenta.toString()+ic;
+                    modelo.insertVenta(o);
+                
                 cuent.updateUI();
                 cuent.setEditable(false);
                 cuent.repaint();
@@ -157,7 +169,6 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 this.ventanaSimple.mtv.setDatos(aux);
                 this.ventanaSimple.tablaC.updateUI();
                 ventanaSimple.generaCuenta.setEnabled(false);
-                
                 ventanaSimple.total.setText("Total :   $0.0");
                 ventanaSimple.cambio.setText("Cambio :    ");
                 

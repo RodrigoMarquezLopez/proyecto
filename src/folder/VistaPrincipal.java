@@ -71,6 +71,7 @@ public class VistaPrincipal extends JFrame{
     protected final String usuario;
     protected BotonPersonalizado ventaN;
     protected BotonPersonalizado confgP;
+    protected BotonPersonalizado datosVentas;
     
     public  VistaPrincipal(String usuario){
         JTabbedPane panelPrincipal = new JTabbedPane();
@@ -122,6 +123,11 @@ public class VistaPrincipal extends JFrame{
         confgP = new BotonPersonalizado();
         confgP.setText("CONFIGURACION PRODUCTOS");
         confgP.setIcon(new ImageIcon("src/imagenes/config.png"));
+        datosVentas = new BotonPersonalizado();
+        datosVentas.setText("DATOS VENTAS");
+        datosVentas.setIcon(new ImageIcon("src/imagenes/dVentas.png"));
+        
+        
         
         JPanel centro = new JPanel();
         centro.setLayout(new BorderLayout());
@@ -132,9 +138,15 @@ public class VistaPrincipal extends JFrame{
             tpc.add(ventaN);
             JPanel b1 = new JPanel();
             b1.setOpaque(false);
-            b1.setPreferredSize(new Dimension(200,100));
+            b1.setPreferredSize(new Dimension(100,100));
             tpc.add(b1);
             tpc.add(confgP);
+            JPanel b2 = new JPanel();
+            b2.setOpaque(false);
+            b2.setPreferredSize(new Dimension(100,100));
+            tpc.add(b2);
+            tpc.add(datosVentas);
+            
         centro.add(tpc,BorderLayout.NORTH);
         centro.add(sp,BorderLayout.CENTER);
         JPanel a1 = new JPanel();
@@ -325,6 +337,8 @@ public class VistaPrincipal extends JFrame{
         ventaN.addActionListener(c);
         confgP.setActionCommand("producto");
         confgP.addActionListener(c);
+        datosVentas.setActionCommand("dVentas");
+        datosVentas.addActionListener(c);
         this.addWindowListener(c);
     }
     
