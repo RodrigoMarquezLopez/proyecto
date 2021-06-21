@@ -89,6 +89,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             this.ventanaSimple.tablaC.updateUI();
             ventanaSimple.generaCuenta.setEnabled(true);
             ventanaSimple.total.setText("Total :   $"+String.format("%.2f",cuenta.getTotal()));
+            ventanaSimple.cantidad.setValue(1);
             }else{
                 JOptionPane.showMessageDialog(ventanaSimple,"Selecciona una columna");
             }
@@ -145,8 +146,8 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 vCuenta.setResizable(false);
                 cuent.setFont(new Font("Arial",Font.BOLD,16));
                 vCuenta.setSize(500,500);
-                String ic = String.format(    "\n    RECIBIDO:.......................................%.2f",Double.parseDouble(ventanaSimple.recibido.getText()));
-                ic = ic +   String.format(    "\n    CAMBIO ENTREGADO:...............................%.2f\n",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal());
+                String ic = String.format(    "\n    RECIBIDO:.......................................$%5.2f",Double.parseDouble(ventanaSimple.recibido.getText()));
+                ic = ic +   String.format(    "\n    CAMBIO ENTREGADO:...............................$%5.2f\n",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal());
                 ic = ic + "  ATENDIO :"+ventanaSimple.usr;
                 cuent.setText(cuenta.toString()+ic);
                     //Conexion a base de datos
@@ -171,6 +172,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 ventanaSimple.generaCuenta.setEnabled(false);
                 ventanaSimple.total.setText("Total :   $0.0");
                 ventanaSimple.cambio.setText("Cambio :    ");
+                ventanaSimple.recibido.setText("");
                 
                 }else{
                     JOptionPane.showMessageDialog(ventanaSimple,"No es suficiente dinero");

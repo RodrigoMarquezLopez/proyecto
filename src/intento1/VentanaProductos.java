@@ -57,6 +57,8 @@ public class VentanaProductos extends JDialog{
     protected final String rBuqueda = "Ingresa busqueda";
     
     
+    
+    
     public VentanaProductos(JFrame f){
         super(f);
         Color color = new Color(3, 45, 62, 255);

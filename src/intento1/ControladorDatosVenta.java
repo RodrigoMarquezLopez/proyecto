@@ -49,26 +49,9 @@ private void cargarTableVentas(){
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case "buscar":
-                boolean val = valida();
-                if(val){
-                    String s = "";
-                    s = vdv.año.getValue()+"-"+vdv.mes.getValue()+"-"+vdv.dia.getValue();
-                    List<Object[]> lista = modelo.listVentas(s);
-                    if(lista.size() > 0){
-                    for(int i = 0; i < lista.size(); i++){
-                        Object [] o = lista.get(i);
-                        vdv.modelo.addRow(o);
-                    }
-                    vdv.ventas.updateUI();
-                  }else{
-                    JOptionPane.showMessageDialog(vdv,"No se encontro nada");
-                    cargarTableVentas();
-                    
-                    }
-                }else{
-                
-                    JOptionPane.showMessageDialog(vdv,"Error en fecha");
-                }
+                SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
+                String s =   ff.format((Date)vdv.fecha.getValue());
+                System.out.println(s);
                 break;
             case "seleccionar":
                 int x = vdv.ventas.getSelectedRow();
@@ -91,7 +74,7 @@ private void cargarTableVentas(){
     
     }
     
-    
+  /***  
     private boolean valida(){
     try{
         int a = (int)vdv.año.getValue();
@@ -114,7 +97,7 @@ private void cargarTableVentas(){
             
             }
         
-        }else{
+        }else if(m==2 || m==4 || m== 6 || m==9 || m==11){
             if(d > 31){
                 return false;
             }
@@ -126,6 +109,6 @@ private void cargarTableVentas(){
     }
        return true;
     }
-    
+    **/
     
 }

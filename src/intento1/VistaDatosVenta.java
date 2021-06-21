@@ -16,14 +16,20 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JSpinner.DateEditor;
 import javax.swing.JTextArea;
+import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DateFormatter;
 
 /**
  *
@@ -38,9 +44,10 @@ public class VistaDatosVenta extends JDialog{
     protected final String [] meses = {"12","11","10","09","08","07","06","05","04","03","02","01"};
     protected final String [] dias = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15",
                                      "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-    protected Spin año;
-    protected Spin mes;
-    protected Spin dia;
+
+    
+    protected Spin fecha;
+    
     protected JTextArea ticket;
     protected BotonPersonalizado buscar;
     protected BotonPersonalizado seleccionar;
@@ -56,13 +63,7 @@ public class VistaDatosVenta extends JDialog{
         ventas.setRowHeight(40);
         JScrollPane jsp = new JScrollPane(ventas);
         
-        año = new Spin(2010,2021);
-        mes = new Spin(01,12);
-        dia = new Spin(01,31);
         
-        año.setPreferredSize(new Dimension(100,50));
-        mes.setPreferredSize(new Dimension(100,50));
-        dia.setPreferredSize(new Dimension(100,50));
         buscar = new BotonPersonalizado();
         buscar.setText("Buscar");
         seleccionar = new BotonPersonalizado();
@@ -81,11 +82,21 @@ public class VistaDatosVenta extends JDialog{
                 JPanel n1 = new JPanel();
                 n1.setOpaque(false);
                 n1.setLayout(new FlowLayout());
-                JLabel eti = new JLabel("Buscar         Año: ");
+                JLabel eti = new JLabel("Buscar         :");
                 eti.setForeground(Color.WHITE);
                 eti.setFont(new Font("Arial",Font.BOLD,16));
                 n1.add(eti);
-                n1.add(año);
+                Date date = new Date();
+                SpinnerDateModel sdm = new SpinnerDateModel(date,null,null,Calendar.YEAR);
+                fecha = new Spin(sdm);
+                DateEditor editor = new DateEditor(fecha,"yyyy-MM-dd");
+                DateFormatter formatter = (DateFormatter)editor.getTextField().getFormatter();
+                formatter.setAllowsInvalid(false); // this makes what you want
+                formatter.setOverwriteMode(true);
+                fecha.setEditor(editor);
+                n1.add(fecha);
+                //n1.add(año);
+                /**
                 JLabel eti1 = new JLabel(" Mes: ");
                 eti1.setForeground(Color.WHITE);
                 eti1.setFont(new Font("Arial",Font.BOLD,16));
@@ -96,6 +107,7 @@ public class VistaDatosVenta extends JDialog{
                 eti2.setFont(new Font("Arial",Font.BOLD,16));
                 n1.add(eti2);
                 n1.add(dia);
+                * **/
                 n1.add(buscar);
                 
         norte.add(n1,BorderLayout.SOUTH);

@@ -20,11 +20,11 @@ public class Cuenta{
     public Cuenta(){
         total = 0.0;
         contenido = new ArrayList<Producto>();
-        encabezado = "  ------------------- SIMULADOR CIBER ---------------------- \n"+
-                     "           Calle Aldama San Felipe del Agua Oax. 77,        \n"
-                +    "      San FELIPE, Centro, 71290 Oaxaca de Juárez, Oax.      \n"+
-                     "_____________________________________________________________\n"+
-                     " | CANTIDAD |       NOMBRE      | PRECIO UNI.|   SUBTOTAL  |  \n";
+        encabezado = "          ------------------- SIMULADOR CIBER ---------------------- \n"+
+                     "                    Calle Aldama San Felipe del Agua Oax. 77,        \n"
+                +    "                San FELIPE, Centro, 71290 Oaxaca de Juárez, Oax.      \n"+
+                     " ------------------------------------------------------------------------------------- \n"+
+                     " | CANTIDAD |            NOMBRE           | PRECIO UNI.|   SUBTOTAL  |  \n";
        
     }
     
@@ -47,10 +47,10 @@ public class Cuenta{
             return "";
         for(int i = 0; i < contenido.size();i++){
                                   
-            s = s + String.format("  %2d  %16s         %1.2f    %2.2f\n",contenido.get(i).getCantidad(),
+            s = s + String.format("  %2d                      %16s                   %5.2f       %5.2f\n",contenido.get(i).getCantidad(),
                     contenido.get(i).getNombre(),contenido.get(i).getPrecio(),(Double)(contenido.get(i).getCantidad()*contenido.get(i).getPrecio()));
         }
-        s = s + String.format(    "\n    TOTAL:.......................................%.2f",total);
+        s = s + String.format(    "\n    TOTAL:..........................................$%5.2f",total);
         return s;
     
     }
@@ -62,4 +62,14 @@ public class Cuenta{
     public ArrayList<Producto> getProductos(){
         return contenido;
     }
+    
+    public static void main(String[] args) {
+        Producto p = new Producto(10,"jlaksjdklsdmfklsmdf",250.99);
+        Producto p1 = new Producto(10,"jlaksjdklsdmfklsmdf",250.99);
+        Cuenta c = new Cuenta();
+        c.agregarProducto(p,5);
+        c.agregarProducto(p1,10);
+        System.out.println(c.toString());
+    }
+    
 }
