@@ -158,6 +158,7 @@ public class VistaVentaSimple extends JDialog{
        this.add(principal,BorderLayout.CENTER);
        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
        this.setSize(new Dimension(1200,700));
+       this.setTitle("Ventana de ventas");
        this.setResizable(false);
        
        //this.setModal(true);

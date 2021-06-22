@@ -70,7 +70,7 @@ public class VistaDatosVenta extends JDialog{
         seleccionar.setText("Seleccionar");
         ticket = new JTextArea();
         ticket.setFont(new Font("Arial",Font.BOLD,12));
-        ticket.setPreferredSize(new Dimension(500,500));
+        ticket.setPreferredSize(new Dimension(390,500));
         
         JPanel norte = new JPanel();
         norte.setOpaque(false);
@@ -147,6 +147,7 @@ public class VistaDatosVenta extends JDialog{
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setSize(700,800);
         this.setResizable(false);
+        this.setTitle("Datos ventas");
 }
     public void ConectaControlador(ControladorDatosVenta c){
         this.buscar.setActionCommand("buscar");

@@ -49,9 +49,27 @@ private void cargarTableVentas(){
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case "buscar":
+                try{
                 SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
                 String s =   ff.format((Date)vdv.fecha.getValue());
                 System.out.println(s);
+                List<Object []> lista = modelo.listVentas(s);
+                if(!lista.isEmpty()){    
+                for(int i = 0; i<lista.size(); i++){
+                        Object [] o = lista.get(i);
+                        vdv.modelo.addRow(o);
+                    }
+                vdv.ventas.updateUI();
+                }else{
+                    cargarTableVentas();
+                    JOptionPane.showMessageDialog(vdv,"No hay elementos");
+                
+                }
+                }catch(Exception ex){JOptionPane.showMessageDialog(vdv,"Erro al ingresar fecha");}
+                
+                
+                
+                
                 break;
             case "seleccionar":
                 int x = vdv.ventas.getSelectedRow();

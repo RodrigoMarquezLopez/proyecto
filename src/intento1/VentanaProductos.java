@@ -144,7 +144,7 @@ public class VentanaProductos extends JDialog{
        
        this.setResizable(false);
        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-       
+       this.setTitle("Configuracion productos");
        
     
     
