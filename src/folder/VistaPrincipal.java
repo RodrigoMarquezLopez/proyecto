@@ -6,6 +6,7 @@
 package folder;
 
 
+import Inicio.Usuario;
 import componentesproyecto.BotonPersonalizado;
 import componentesproyecto.Tabla;
 import componentesproyecto.Titulo;
@@ -68,12 +69,12 @@ public class VistaPrincipal extends JFrame{
     private   JScrollPane s;
     private   JScrollPane s1;
     protected JLabel usr;
-    protected final String usuario;
+    protected Usuario usuario;
     protected BotonPersonalizado ventaN;
     protected BotonPersonalizado confgP;
     protected BotonPersonalizado datosVentas;
     
-    public  VistaPrincipal(String usuario){
+    public  VistaPrincipal(Usuario usuario){
         JTabbedPane panelPrincipal = new JTabbedPane();
         this.usuario = usuario;
         panelEquipos = new JPanel();
@@ -93,7 +94,7 @@ public class VistaPrincipal extends JFrame{
        // sp.setPreferredSize(new Dimension(900,500));
         
         
-        usr = new JLabel("USUARIO :  "+this.usuario);
+        usr = new JLabel("USUARIO :  "+this.usuario.getNombre());
         usr.setOpaque(false);
         usr.setIcon(new ImageIcon("src/imagenes/usuario.png"));
         usr.setFont(new Font("Arial",Font.BOLD,16));
@@ -263,7 +264,7 @@ public class VistaPrincipal extends JFrame{
         
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresorabn.png",false),0);
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresoracolor.png",true),1);
-         this.setVisible(true);
+        //this.setVisible(true);
         this.setSize(1350,950);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -343,9 +344,9 @@ public class VistaPrincipal extends JFrame{
     }
     
     public static void main(String[] args) {
-        VistaPrincipal vp = new VistaPrincipal("RAMON");
-        Controlador c = new Controlador(vp);
-        vp.conectControlador(c);
+        //VistaPrincipal vp = new VistaPrincipal();
+        //Controlador c = new Controlador(vp);
+        //vp.conectControlador(c);
     }
     
        

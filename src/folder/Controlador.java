@@ -60,8 +60,8 @@ public class Controlador implements ActionListener,WindowListener{
     private ControladorDatosVenta cdv;
 
     
-    public  Controlador(VistaPrincipal vp) {
-        this.modelo = new Modelo("proyecto");
+    public  Controlador(VistaPrincipal vp,Modelo modelo) {
+        this.modelo = modelo;
         this.vp = vp;
         cargarCostoImpresiones();
         cargarTablaEquipos();
@@ -161,7 +161,7 @@ public class Controlador implements ActionListener,WindowListener{
                     c.agregarProducto(new Producto(0,"Renta de comp.",tarifas[r]),min);
                     else
                     c.agregarProducto(new Producto(0,"Renta de tableta",tarifas[r]),min);    
-                    VistaVentaSimple vi = new VistaVentaSimple(vp,c,vp.usuario); 
+                    VistaVentaSimple vi = new VistaVentaSimple(vp,c,vp.usuario.getNombre()); 
                     contro = new ControladorVentaSimple(vi,modelo);
                     vi.conectaControlador(contro);
                     vi.setModal(true);
@@ -178,7 +178,7 @@ public class Controlador implements ActionListener,WindowListener{
                 break;
                 
             case "vender":
-                VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta(),vp.usuario); 
+                VistaVentaSimple vi = new VistaVentaSimple(vp,new Cuenta(),vp.usuario.getNombre()); 
                 contro = new ControladorVentaSimple(vi,modelo);
                 vi.conectaControlador(contro);
                 vi.setModal(true);

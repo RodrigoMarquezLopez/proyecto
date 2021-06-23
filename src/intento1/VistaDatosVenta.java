@@ -38,12 +38,8 @@ import javax.swing.text.DateFormatter;
 public class VistaDatosVenta extends JDialog{
     
     protected Tabla ventas;
-    protected DefaultTableModel modelo;
-    protected final String [] columnas = {"Id","Monto Total"};
-    protected final String [] años = {"2021","2020","2019","2018"};
-    protected final String [] meses = {"12","11","10","09","08","07","06","05","04","03","02","01"};
-    protected final String [] dias = {"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15",
-                                     "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+    protected ModeloTablaDatosVentas modelo;
+
 
     
     protected Spin fecha;
@@ -58,7 +54,7 @@ public class VistaDatosVenta extends JDialog{
         JPanel principal = new JPanel();
         principal.setBackground(new Color(33, 45, 62, 255));
         principal.setLayout(new BorderLayout());
-        modelo = new DefaultTableModel(columnas,0);
+        modelo = new ModeloTablaDatosVentas();
         ventas = new Tabla(modelo);
         ventas.setRowHeight(40);
         JScrollPane jsp = new JScrollPane(ventas);

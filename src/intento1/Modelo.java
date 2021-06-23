@@ -5,6 +5,7 @@
  */
 package intento1;
 
+import Inicio.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -232,7 +233,7 @@ public List<Object[]> listVentas(String busqueda){
         ResultSet rs;
 
         //Obtener datos de todos los clientes
-        String consultaSQL = "SELECT id,monto FROM ventas WHERE fecha = '"+busqueda+"';";
+        String consultaSQL = "SELECT * FROM ventas WHERE fecha = '"+busqueda+"';";
         // Objeto List que contendrá todos los clientes
         List<Object [] > ventas = new ArrayList<Object[]>();
         try {
@@ -244,9 +245,10 @@ public List<Object[]> listVentas(String busqueda){
             
             //Recorrer el resultado para crear instancias de Cliente
             while(rs.next()){
-                Object [] o = new Object[2];
+                Object [] o = new Object[3];
                 o[0] =  rs.getInt(1);
-                o[1] =  rs.getDouble(2);
+                o[1] = rs.getString(2);
+                o[2] =  rs.getDouble(3);
                 ventas.add(o);
             }
  
@@ -255,6 +257,42 @@ public List<Object[]> listVentas(String busqueda){
         }
         return ventas;
     }
+
+public List<Object[]> listVentas(){
+        PreparedStatement ps;
+        //Objeto para recoger los datos devueltos
+        ResultSet rs;
+
+        //Obtener datos de todos los clientes
+        String consultaSQL = "SELECT * FROM ventas;";
+        // Objeto List que contendrá todos los clientes
+        List<Object [] > ventas = new ArrayList<Object[]>();
+        try {
+            //Preparar el statement con la consulta SQL
+            ps  = getConexion().prepareStatement(consultaSQL);
+                      
+            //Ejecutarla y obtiene en rs el resultado
+            rs  = ps.executeQuery();
+            
+            //Recorrer el resultado para crear instancias de Cliente
+            while(rs.next()){
+                Object [] o = new Object[3];
+                o[0] =  rs.getInt(1);
+                o[1] = rs.getString(2);
+                o[2] =  rs.getDouble(3);
+                ventas.add(o);
+            }
+ 
+        } catch (SQLException e) {
+            System.err.println("Error al CARGAR DATOS " + e);
+        }
+        return ventas;
+    }
+
+
+
+
+
 public String ticket(int id){
         PreparedStatement ps;
         //Objeto para recoger los datos devueltos
@@ -308,6 +346,58 @@ public String ticket(int id){
             return false;
         }
     }  
+    
+    public boolean login(Usuario usr){
+        PreparedStatement ps;
+        ResultSet rs;
+        String consultaSQL = "SELECT * FROM usuarios WHERE nombre = '"+usr.getNombre()+"';";
+        // Objeto List que contendrá todos los clientes
+        List<Producto> Productos = new ArrayList<Producto>();
+        try {
+            //Preparar el statement con la consulta SQL
+            ps  = getConexion().prepareStatement(consultaSQL);
+            rs  = ps.executeQuery();
+            if(rs.next()){
+                if(rs.getString(3).equals(usr.getPass())){
+                usr.setCorreo(rs.getString(4));
+                usr.setId(rs.getInt(1));
+                return true;
+                }else{
+                   return false;
+            }
+            }
+ 
+        } catch (SQLException e) {
+            System.err.println("Error al CARGAR DATOS " + e);
+            return false;
+        }
+     return false;   
+    }
+    
+    
+    
+    public boolean insertUsuario(Usuario usr){
+        //Objeto para ejecutar las instrucciones en la base de datos
+        PreparedStatement ps;
+        String sqlInsertCliente = "insert into usuarios (nombre,contrasenia,correo) values (?,?,?);";
+        try{
+            //Preparar la instrucción
+            ps  = getConexion().prepareStatement(sqlInsertCliente);
+            //Indicar qué información se pasa al Statement
+            ps.setString(1, usr.getNombre());
+            ps.setString(2, usr.getPass());
+            ps.setString(3, usr.getCorreo());
+            System.out.println("usuario agregado");
+            //Ejecutar el comando insert
+            ps.executeUpdate();
+            return true;
+        }catch (SQLException e) {
+            //System.err.println("Error en la INSERCIÓN " + e );
+            return false;
+        }
+    }
+    
+    
     
     
     

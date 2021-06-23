@@ -155,7 +155,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                     SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
                     ff.format(new Date());
                     o[0] = ff.format(new Date());
-                    o[1] =  cuenta.getTotal();
+                    o[1] =  Double.parseDouble(String.format("%.2f",cuenta.getTotal()));
                     o[2] = cuenta.toString()+ic;
                     modelo.insertVenta(o);
                 

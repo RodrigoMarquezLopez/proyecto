@@ -8,6 +8,7 @@ package intento1;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.geometry.VPos;
@@ -28,15 +29,10 @@ public ControladorDatosVenta(VistaDatosVenta vdv, Modelo modelo){
 }
 
 private void cargarTableVentas(){
-    SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
-    List<Object []> lista = modelo.listVentas(ff.format(new Date()));
-    for(int i = 0; i<lista.size(); i++){
-        Object [] o = lista.get(i);
-        vdv.modelo.addRow(o);
-    }
+    //SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
+    List<Object []> lista = modelo.listVentas();
+    vdv.modelo.setDatos(lista);
     vdv.ventas.updateUI();
-    
-
 }
 
 
@@ -54,12 +50,10 @@ private void cargarTableVentas(){
                 String s =   ff.format((Date)vdv.fecha.getValue());
                 System.out.println(s);
                 List<Object []> lista = modelo.listVentas(s);
+                
                 if(!lista.isEmpty()){    
-                for(int i = 0; i<lista.size(); i++){
-                        Object [] o = lista.get(i);
-                        vdv.modelo.addRow(o);
-                    }
-                vdv.ventas.updateUI();
+                    vdv.modelo.setDatos(lista);
+                    vdv.ventas.updateUI();
                 }else{
                     cargarTableVentas();
                     JOptionPane.showMessageDialog(vdv,"No hay elementos");
