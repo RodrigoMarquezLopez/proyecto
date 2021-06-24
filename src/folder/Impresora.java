@@ -47,7 +47,7 @@ public class Impresora extends Thread{
        barra.setValue(0);
        int suma = 100/c.getCantidad();
        for(int i = 0;i<c.getCantidad();i++){
-          System.out.println(nombre +"  Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
+          equipo.setText("Imprimiendo del equipo "+ c.getEquipo() + " hoja "+(i+1)+"/"+c.getCantidad());
           cola.numero++;
           total.setText(""+cola.numero);
           //cola.numero++;

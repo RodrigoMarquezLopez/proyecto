@@ -182,7 +182,7 @@ private boolean validaEliminacion(int i){
                 if(x != -1){
                 int ele = JOptionPane.showConfirmDialog(vpr,"¿Quieres eliminar el producto :"+vpr.productos.getValueAt(x,1)+"?");
                 int d = (Integer)vpr.productos.getValueAt(x,0);
-                if(validaEliminacion(x)){
+                if(validaEliminacion(d)){
                     if(ele == JOptionPane.YES_OPTION){
                         boolean del = modelo.deleteProducto(d);
                          if(!del){
