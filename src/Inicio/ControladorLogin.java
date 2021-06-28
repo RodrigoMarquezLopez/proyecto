@@ -55,6 +55,8 @@ public class ControladorLogin implements ActionListener {
                 VentanaCrearUsr crearUsr = new VentanaCrearUsr(log);
                 ControladorCrearUsr c = new ControladorCrearUsr(crearUsr, modelo);
                 crearUsr.ConectaControlador(c);
+                crearUsr.setModal(true);
+                crearUsr.setVisible(true);
                 break;
             case "cerrar":
                 modelo.closeConexion();

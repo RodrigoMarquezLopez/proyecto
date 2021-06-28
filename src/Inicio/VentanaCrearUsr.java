@@ -128,8 +128,9 @@ public class VentanaCrearUsr extends JDialog{
             centro.add(aceptar,gbc);
             
             principal.add(centro,BorderLayout.CENTER);
+            this.setTitle("Crear Usuario");
             this.add(principal);
-            this.setVisible(true);
+            //this.setVisible(true);
             this.setSize(600,400);
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setResizable(false);
