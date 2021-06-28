@@ -42,19 +42,19 @@ public class VentanaCrearUsr extends JDialog{
         
         JLabel pass = new JLabel();
         pass.setText("Contraseña                    ");
-        pass.setIcon(new ImageIcon("src/imagenes/user.png"));
+        pass.setIcon(new ImageIcon("src/imagenes/lock.png"));
         pass.setFont(new Font("Arial", Font.ITALIC, 18));
         pass.setForeground(Color.WHITE);
         
         JLabel pass1 = new JLabel();
         pass1.setText("Confirma contraseña    ");
-        pass1.setIcon(new ImageIcon("src/imagenes/user.png"));
+        pass1.setIcon(new ImageIcon("src/imagenes/lock.png"));
         pass1.setFont(new Font("Arial", Font.ITALIC, 18));
         pass1.setForeground(Color.WHITE);
         
         JLabel mail = new JLabel();
         mail.setText("Correo Electronico       ");
-        mail.setIcon(new ImageIcon("src/imagenes/user.png"));
+        mail.setIcon(new ImageIcon("src/imagenes/correo.png"));
         mail.setFont(new Font("Arial", Font.ITALIC, 18));
         mail.setForeground(Color.WHITE);
         

@@ -154,13 +154,14 @@ public class VistaDatosVenta extends JDialog{
     
     
     
-    
+   
     public static void main(String[] args) {
         VistaDatosVenta vdv = new VistaDatosVenta(new JFrame());
         ControladorDatosVenta c = new ControladorDatosVenta(vdv,new Modelo("proyecto"));
         vdv.ConectaControlador(c);
     
     }
+    
     
     
     
