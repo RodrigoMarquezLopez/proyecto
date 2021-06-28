@@ -61,25 +61,25 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
                         nuSeg=0;//pongo en cero los segundos 
                         nuMin++;//incremento el numero de minutos
                         dtm.setValueAt(costo*(nuMin+1),row,3);
-                     if(impb || impc){   
+                     //if(impb || impc){   
                         if(randoms()){
-                            if(rImpresora && impb){
+                            if(rImpresora){
                             Impresion i = new Impresion(3,"Impresiones B/N",0.0,(row+1));
                             i.setCantidad(rHojas);
                             nBn = nBn + i.getCantidad();
                             dtm.setValueAt(nBn,row,4);
                             bn.enviarImprimir(i);
                             impb = false;
-                            }else if(!rImpresora && impc){
+                           }else if(!rImpresora){
                             Impresion i = new Impresion(4,"Impresiones color",0.0,(row+1));
                             i.setCantidad(rHojas);
                             col = col + i.getCantidad();
                             dtm.setValueAt(col,row,5);
                             color.enviarImprimir(i);
                             impc = false;
-                            }
+                           }
                         }
-                     }
+                     //}
                                 
                     }else{//incremento el numero de horas
                             nuHora++;

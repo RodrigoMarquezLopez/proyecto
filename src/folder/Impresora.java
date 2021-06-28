@@ -41,6 +41,7 @@ public class Impresora extends Thread{
    }
    
    public void run(){
+       equipo.setText("Esperando ...");
        while(1 == 1){
        Impresion c = cola.imprimir();
        equipo.setText(""+c.getEquipo());
@@ -70,6 +71,7 @@ public class Impresora extends Thread{
          }catch(InterruptedException e){}
         }
        barra.setValue(0);
+       equipo.setText("Esperando ...");
        }
    }
    
