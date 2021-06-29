@@ -155,6 +155,7 @@ private boolean validaEliminacion(int i){
                 vpr.agregar.setEnabled(false);
             break;    
             case "aceptar":
+                if(!vpr.nombre.getText().equals("") && !vpr.id.getText().equals("") && !vpr.precioN.getText().equals("")){
                 String nombre = vpr.nombre.getText();
                 if(validaNombre(nombre)){
                     int id = Integer.parseInt(vpr.id.getText());
@@ -174,6 +175,10 @@ private boolean validaEliminacion(int i){
                 vpr.id.setText("");
                 vpr.nombre.setText("");
                 vpr.precioN.setText("");
+                }else{
+                    JOptionPane.showMessageDialog(vpr,"Hay campos vacios");
+                
+                }
                 break;
                 
                 

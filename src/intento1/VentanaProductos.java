@@ -88,6 +88,7 @@ public class VentanaProductos extends JDialog{
             arriba.add(busqueda);
             find = new BotonPersonalizado();
             find.setText("Buscar");
+            find.setToolTipText("Busca un producto por nombre");
             arriba.add(find);
         top.add(arriba,BorderLayout.NORTH);
             jsb = new JScrollPane(productos);
@@ -99,12 +100,15 @@ public class VentanaProductos extends JDialog{
             sur.setOpaque(false);
             modificar = new BotonPersonalizado();
             modificar.setText("MODIFICAR PRECIO");
+            modificar.setToolTipText("Modifica el precio del producto seleccionado");
             sur.add(modificar);
             agregar = new BotonPersonalizado();
             agregar.setText("AGREGAR");
+            agregar.setToolTipText("Agregar un nuevo producto para el ciber");
             sur.add(agregar);
             eliminar = new BotonPersonalizado();
             eliminar.setText("ELIMINAR");
+            eliminar.setToolTipText("Elimina un producto del ciber");
             sur.add(eliminar);
         top.add(sur,BorderLayout.SOUTH);
         JPanel borde = new JPanel();
@@ -133,8 +137,10 @@ public class VentanaProductos extends JDialog{
        
        guardar = new BotonPersonalizado();
        guardar.setText("GUARDAR");
+       guardar.setToolTipText("Guarda el cambio de precio");
        aceptar = new BotonPersonalizado();
        aceptar.setText("ACEPTAR");
+       aceptar.setToolTipText("Agrega el nuevo producto");
        principal2 = new JPanel();
        principal2.setOpaque(false);
        principal.add(principal2,1);
@@ -145,7 +151,7 @@ public class VentanaProductos extends JDialog{
        this.setResizable(false);
        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
        this.setTitle("Configuracion productos");
-       
+       this.setIconImage(f.getIconImage());
     
     
     }

@@ -99,6 +99,7 @@ public class Login extends JFrame {
         Image newimg = image.getScaledInstance(25, 23, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);
         close = new JButton(imageIcon);
+        close.setToolTipText("Cierra la aplicación");
         //close.setActionCommand("Cerrrar");
         //close.adctionListener(this);
         close.setBorder(null);
@@ -141,6 +142,7 @@ public class Login extends JFrame {
         join = new JButton(new ImageIcon("src/imagenes/button_ingresar.png"));
         join.setBackground(new Color(33, 45, 62, 255));
         join.setBorder(null);
+        join.setToolTipText("Ingresar con el usuario");
        // join.setActionCommand("ingresar");
         //join.addActionListener(this);
         r.fill = GridBagConstraints.HORIZONTAL;
@@ -150,6 +152,7 @@ public class Login extends JFrame {
 
         Nuevo = new JButton(new ImageIcon("src/imagenes/nuevo.png"));
         Nuevo.setBorder(null);
+        Nuevo.setToolTipText("Crear un nuevo usuario");
         Nuevo.setBackground(new Color(33, 45, 62, 255));
         formulario.add(Nuevo,r);
         main.add(formulario, BorderLayout.CENTER);

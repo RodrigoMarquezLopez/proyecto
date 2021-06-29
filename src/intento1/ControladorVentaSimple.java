@@ -47,6 +47,8 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
     }
     
     protected void cargarTabla(){
+        ventanaSimple.tablaP.setToolTipText("Tabla de prodructos");
+        ventanaSimple.tablaC.setToolTipText("Tabla productos comprados");
         List<Object[]> lista = new ArrayList<Object[]>();
         List<Producto> productos = modelo.listProductos();
         for(Producto c: productos){

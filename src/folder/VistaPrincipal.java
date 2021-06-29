@@ -90,6 +90,7 @@ public class VistaPrincipal extends JFrame{
         modeloE = new DefaultTableModel(columnas,0);
         tablaEquipos = new Tabla(modeloE);
         tablaEquipos.setRowHeight(100);
+        tablaEquipos.setToolTipText("Equipos a rentar");
         JScrollPane sp = new JScrollPane(tablaEquipos);
        // sp.setPreferredSize(new Dimension(900,500));
         
@@ -114,19 +115,24 @@ public class VistaPrincipal extends JFrame{
         
         renta = new BotonPersonalizado();
         renta.setText("RENTAR");
+        renta.setToolTipText("Rentar el equipo seleccionado");
         renta.setIcon(new ImageIcon("src/imagenes/renta.png"));
         detener = new BotonPersonalizado();
         detener.setText("DETENER");
+        detener.setToolTipText("Detiene el tiempo para el equipo rentado y genera una cuenta");
         detener.setIcon(new ImageIcon("src/imagenes/detener.png"));
         ventaN = new BotonPersonalizado();
         ventaN.setText("VENDER");
+        ventaN.setToolTipText("Vender un producto del ciber");
         ventaN.setIcon(new ImageIcon("src/imagenes/vender.png"));
         confgP = new BotonPersonalizado();
         confgP.setText("CONFIGURACION PRODUCTOS");
+        confgP.setToolTipText("Permite ver la configuracion a los productos");
         confgP.setIcon(new ImageIcon("src/imagenes/config.png"));
         datosVentas = new BotonPersonalizado();
         datosVentas.setText("DATOS VENTAS");
         datosVentas.setIcon(new ImageIcon("src/imagenes/dVentas.png"));
+        datosVentas.setToolTipText("Informacion de las ventas realizadas");
         
         
         
@@ -214,7 +220,9 @@ public class VistaPrincipal extends JFrame{
         modeloIBN = new DefaultTableModel(columnasImp,0);
         modeloColor = new DefaultTableModel(columnasImp,0);
         colaBn = new Tabla(modeloIBN);
+        colaBn.setToolTipText("Documento siguiente a imprimir");
         colaColor = new Tabla(modeloColor);
+        colaColor.setToolTipText("Documento siguiente a imprimir");
         colaBn.setRowHeight(40);
         colaColor.setRowHeight(40);
         s = new JScrollPane(colaBn);

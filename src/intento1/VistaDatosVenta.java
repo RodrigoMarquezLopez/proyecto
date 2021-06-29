@@ -62,8 +62,10 @@ public class VistaDatosVenta extends JDialog{
         
         buscar = new BotonPersonalizado();
         buscar.setText("Buscar");
+        buscar.setToolTipText("Busca una fecha");
         seleccionar = new BotonPersonalizado();
         seleccionar.setText("Seleccionar");
+        seleccionar.setToolTipText("Selecciona una fecha");
         ticket = new JTextArea();
         ticket.setFont(new Font("Arial",Font.BOLD,12));
         ticket.setPreferredSize(new Dimension(390,500));
@@ -91,20 +93,7 @@ public class VistaDatosVenta extends JDialog{
                 formatter.setOverwriteMode(true);
                 fecha.setEditor(editor);
                 n1.add(fecha);
-                //n1.add(año);
-                /**
-                JLabel eti1 = new JLabel(" Mes: ");
-                eti1.setForeground(Color.WHITE);
-                eti1.setFont(new Font("Arial",Font.BOLD,16));
-                n1.add(eti1);
-                n1.add(mes);
-                JLabel eti2 = new JLabel("Dia: ");
-                eti2.setForeground(Color.WHITE);
-                eti2.setFont(new Font("Arial",Font.BOLD,16));
-                n1.add(eti2);
-                n1.add(dia);
-                * **/
-                n1.add(buscar);
+               n1.add(buscar);
                 
         norte.add(n1,BorderLayout.SOUTH);
         principal.add(norte,BorderLayout.NORTH);
@@ -144,6 +133,7 @@ public class VistaDatosVenta extends JDialog{
         this.setSize(700,800);
         this.setResizable(false);
         this.setTitle("Datos ventas");
+        this.setIconImage(f.getIconImage());
 }
     public void ConectaControlador(ControladorDatosVenta c){
         this.buscar.setActionCommand("buscar");

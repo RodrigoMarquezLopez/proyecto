@@ -33,8 +33,7 @@ import javax.swing.SwingConstants;
  * @author rodri
  */
 public class VistaVentaSimple extends JDialog{
-    private String [] columnas = {"Equipo","Estado","Tiempo","Total de Uso","#Imp. B/N","#Imp Color"};
-    private String [] columnasImp = {"Equipo","Cantidad de Hojas"};
+    
     protected JPanel        principal;
     protected Tabla        tablaP;
     protected Tabla       tablaC;
@@ -102,6 +101,7 @@ public class VistaVentaSimple extends JDialog{
         busqueda.setText(rBuqueda);
         buscar = new BotonPersonalizado();
         buscar.setText("BUSCAR");
+        buscar.setToolTipText("Busca un producto por nombre");
         
         izq.add(bq);
         izq.add(busqueda);
@@ -119,14 +119,17 @@ public class VistaVentaSimple extends JDialog{
        der.add(cantidad);
        agregar = new BotonPersonalizado();
        agregar.setText("AGREGAR");
+       agregar.setToolTipText("Agrega el producto de acuerdo a la cantidad a la tabla");
        //cuent= new JTextArea("");
        der.add(agregar);
        eliminar = new BotonPersonalizado();
        eliminar.setText("ELIMINAR");
        eliminar.setEnabled(false);
+       eliminar.setToolTipText("Elimina una fila de la tabla de compras");
        generaCuenta = new BotonPersonalizado();
        generaCuenta.setText("GENERAR CUENTA");
        generaCuenta.setEnabled(false);
+       generaCuenta.setToolTipText("Genera la cuenta con los productos de la tabla compras");
        der.add(eliminar);
        der.add(jsp2);
        der.add(total);
@@ -160,7 +163,7 @@ public class VistaVentaSimple extends JDialog{
        this.setSize(new Dimension(1200,700));
        this.setTitle("Ventana de ventas");
        this.setResizable(false);
-       
+       this.setIconImage(f.getIconImage());
        //this.setModal(true);
        //this.pack();
         

@@ -84,6 +84,7 @@ public class VentanaCrearUsr extends JDialog{
             gbc.gridwidth = 2;
             gbc.gridheight = 1;
             nombre = new CuadroTex(15);
+            nombre.setToolTipText("Nombre del usuario sin espacios");
             centro.add(nombre,gbc);
             gbc.gridx = 0;
             gbc.gridy = 1;
@@ -95,6 +96,7 @@ public class VentanaCrearUsr extends JDialog{
             gbc.gridwidth = 2;
             gbc.gridheight = 1;
             cont = new CuadroContr(15);
+            cont.setToolTipText("Contraseña para el usario");
             centro.add(cont,gbc);
             gbc.gridx = 0;
             gbc.gridy = 2;
@@ -106,6 +108,7 @@ public class VentanaCrearUsr extends JDialog{
             gbc.gridwidth = 2;
             gbc.gridheight = 1;
             cont1 = new CuadroContr(15);
+            cont1.setToolTipText("Confirmacion de la contraseña");
             centro.add(cont1,gbc);
             gbc.gridx = 0;
             gbc.gridy = 3;
@@ -117,6 +120,7 @@ public class VentanaCrearUsr extends JDialog{
             gbc.gridwidth = 2;
             gbc.gridheight = 1;
             correo = new CuadroTex(15);
+            correo.setToolTipText("Correo electronico del usario");
             centro.add(correo,gbc);
             gbc.gridx = 2;
             gbc.gridy = 4;
@@ -125,6 +129,7 @@ public class VentanaCrearUsr extends JDialog{
             
             aceptar = new BotonPersonalizado();
             aceptar.setText("Aceptar");
+            aceptar.setToolTipText("Registrar el usuario");
             centro.add(aceptar,gbc);
             
             principal.add(centro,BorderLayout.CENTER);
