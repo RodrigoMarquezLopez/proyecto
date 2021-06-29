@@ -358,7 +358,7 @@ public String ticket(int id){
             ps  = getConexion().prepareStatement(consultaSQL);
             rs  = ps.executeQuery();
             if(rs.next()){
-                if(rs.getString(3).equals(usr.getPass())){
+                if(rs.getString(3).equals(usr.getPass()) && rs.getString(2).equals(usr.getNombre())){
                 usr.setCorreo(rs.getString(4));
                 usr.setId(rs.getInt(1));
                 return true;

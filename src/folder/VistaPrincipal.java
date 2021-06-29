@@ -265,6 +265,8 @@ public class VistaPrincipal extends JFrame{
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresorabn.png",false),0);
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresoracolor.png",true),1);
         //this.setVisible(true);
+        this.setTitle("SIMULADOR CIBER");
+        this.setIconImage(new ImageIcon("src/imagenes/cpu.png").getImage());
         this.setSize(1450,950);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
