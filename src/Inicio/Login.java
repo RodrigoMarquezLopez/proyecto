@@ -66,7 +66,7 @@ public class Login extends JFrame {
         main.add(titulo2);
         s.putConstraint(SpringLayout.NORTH, titulo2, 40, SpringLayout.NORTH, titulo);
         s.putConstraint(SpringLayout.WEST, titulo2, 98, SpringLayout.WEST, main);
-        ImageIcon imageIcon = new ImageIcon("src/imagenes/fondo.png");
+        ImageIcon imageIcon = new ImageIcon("src/imagenes/fondo1.png");
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(350, 480, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(newimg);

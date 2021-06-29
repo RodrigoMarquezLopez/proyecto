@@ -12,44 +12,31 @@ import componentesproyecto.Tabla;
 import componentesproyecto.Titulo;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.MenuBar;
-import java.awt.Shape;
-import java.awt.geom.RoundRectangle2D;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 /**
  *
  * @author rodri
  */
 public class VistaPrincipal extends JFrame{
-    private JPanel panelEquipos;
-    private JPanel panelImpresoras;
-    private String [] columnas = {"Equipo","Estado","Tiempo","Total de Uso","#Imp. B/N","#Imp Color"};
-    private String [] columnasImp = {"Equipo","Cantidad de Hojas"};
+    private final JPanel panelEquipos;
+    private final JPanel panelImpresoras;
+    private final String [] columnas = {"Equipo","Estado","Tiempo","Total de Uso","#Imp. B/N","#Imp Color"};
+    private final String [] columnasImp = {"Equipo","Cantidad de Hojas"};
     
     protected Tabla tablaEquipos;
     protected DefaultTableModel modeloE;
@@ -66,8 +53,8 @@ public class VistaPrincipal extends JFrame{
     protected JLabel equipo2;
     protected JLabel totalbn;
     protected JLabel totalcolor;
-    private   JScrollPane s;
-    private   JScrollPane s1;
+    private final   JScrollPane s;
+    private final   JScrollPane s1;
     protected JLabel usr;
     protected Usuario usuario;
     protected BotonPersonalizado ventaN;
@@ -264,7 +251,8 @@ public class VistaPrincipal extends JFrame{
         
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresorabn.png",false),0);
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresoracolor.png",true),1);
-        //this.setVisible(true);
+        this.setTitle("SIMULADOR CiBER");
+        this.setIconImage(new ImageIcon("src/imagenes/cpu.png").getImage());
         this.setSize(1450,950);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
