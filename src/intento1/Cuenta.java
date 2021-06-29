@@ -20,14 +20,14 @@ public class Cuenta{
    // private String hora;
     
     public Cuenta(){
-        SimpleDateFormat ff = new SimpleDateFormat("             YYYY-MM-dd         HH:mm:ss");
+        SimpleDateFormat ff = new SimpleDateFormat("                                     YYYY-MM-dd         HH:mm:ss");
         total = 0.0;
         contenido = new ArrayList<Producto>();
-        encabezado = "             ------------------- SIMULADOR CIBER ---------------------- \n"+
+        encabezado = "              ------------------- SIMULADOR CIBER ---------------------- \n"+
                      "                        Calle Aldama San Felipe del Agua Oax. 77,        \n"
                 +    "                    San FELIPE, Centro, 71290 Oaxaca de Juárez, Oax.      \n"+
                       ff.format(new Date())+"\n"+
-                     "   ------------------------------------------------------------------------------------- \n"+
+                     "      ------------------------------------------------------------------------------------- \n"+
                      " | CANTIDAD |            NOMBRE           | PRECIO UNI.|   SUBTOTAL  |  \n";
        
     }
