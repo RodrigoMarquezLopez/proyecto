@@ -24,6 +24,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -69,7 +70,25 @@ public class VentanaProductos extends JDialog{
         mtp = new ModeloTablaProductos();
         productos = new Tabla(mtp);
         productos.setRowHeight(40);
-        //Panel para la tabla y los botones de las acciones a realizar
+        
+        productos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumn columna = productos.getColumn("Id");
+        columna.setPreferredWidth(100);
+        columna.setMaxWidth(100);
+        columna.setMinWidth(100);
+        TableColumn columna1 = productos.getColumn("Nombre");
+        TableColumn columna2 = productos.getColumn("Precio");
+        columna1.setPreferredWidth(500);
+        columna1.setMaxWidth(500);
+        columna1.setMinWidth(500);
+        columna2.setPreferredWidth(100);
+        columna2.setMaxWidth(100);
+        columna2.setMinWidth(100);
+
+
+
+
+//Panel para la tabla y los botones de las acciones a realizar
         JPanel top = new JPanel();
         top.setLayout(new BorderLayout());
         top.setOpaque(false);
@@ -93,7 +112,7 @@ public class VentanaProductos extends JDialog{
         top.add(arriba,BorderLayout.NORTH);
             jsb = new JScrollPane(productos);
             jsb.setOpaque(false);
-            jsb.setPreferredSize(new Dimension(100,100));
+            jsb.setPreferredSize(new Dimension(700,100));
         top.add(jsb,BorderLayout.CENTER);
             JPanel sur = new JPanel();
             sur.setLayout(new FlowLayout());
@@ -145,7 +164,7 @@ public class VentanaProductos extends JDialog{
        principal2.setOpaque(false);
        principal.add(principal2,1);
        
-       this.setSize(new Dimension(800,700));
+       this.setSize(new Dimension(745,700));
        //this.setModal(true);
        
        this.setResizable(false);
@@ -290,5 +309,6 @@ public class VentanaProductos extends JDialog{
         VentanaProductos vp = new VentanaProductos(null);
         ControladorProductos c = new ControladorProductos(vp,new Modelo("proyecto"));
         vp.conectaControlador(c);
+        vp.setVisible(true);
     }
 }

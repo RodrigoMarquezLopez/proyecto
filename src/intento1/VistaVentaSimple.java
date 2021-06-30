@@ -27,6 +27,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -80,6 +81,41 @@ public class VistaVentaSimple extends JDialog{
         tablaP.setRowHeight(40);
         tablaC = new Tabla(mtv);
         tablaC.setRowHeight(40);
+        tablaP.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
+        TableColumn columna = tablaP.getColumn("Id");
+        columna.setPreferredWidth(100);
+        columna.setMaxWidth(100);
+        columna.setMinWidth(100);
+        TableColumn columna1 = tablaP.getColumn("Nombre");
+        TableColumn columna2 = tablaP.getColumn("Precio");
+        columna1.setPreferredWidth(332);
+        columna1.setMaxWidth(332);
+        columna1.setMinWidth(332);
+        columna2.setPreferredWidth(100);
+        columna2.setMaxWidth(100);
+        columna2.setMinWidth(100);
+        
+        tablaC.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumn columnaC1 = tablaC.getColumn("Cantidad");
+        columnaC1.setPreferredWidth(100);
+        columnaC1.setMaxWidth(100);
+        columnaC1.setMinWidth(100);
+        TableColumn columnaC2 = tablaC.getColumn("Nombre");
+        TableColumn columnaC3 = tablaC.getColumn("Precio");
+        columnaC2.setPreferredWidth(332);
+        columnaC2.setMaxWidth(332);
+        columnaC2.setMinWidth(332);
+        columnaC3.setPreferredWidth(100);
+        columnaC3.setMaxWidth(100);
+        columnaC3.setMinWidth(100);
+        
+        
+        
+        
+        
+        
+        
        
         JScrollPane jsp1 = new JScrollPane(tablaP);
         JScrollPane jsp2 = new JScrollPane(tablaC);
