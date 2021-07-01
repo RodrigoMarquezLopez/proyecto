@@ -5,6 +5,7 @@
  */
 package intento1;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -72,9 +73,23 @@ private void cargarTableVentas(){
                     int id = (Integer) vdv.ventas.getValueAt(x,0);
                     vdv.ticket.setText("");
                     String t = modelo.ticket(id);
-                    System.out.println(t);
+                    System.out.println(t.length());
+                    if(t.length()<1700){
+                    vdv.ticket.setSize(390,500);
+                    vdv.ticket.setFont(new Font("Arial",Font.BOLD,12));
+                    vdv.setSize(700,800);    
                     vdv.ticket.setText(t);
                     vdv.ticket.updateUI();
+                    vdv.repaint();
+                    }else{
+                        vdv.ticket.setSize(390,1000);
+                        vdv.ticket.setFont(new Font("Arial",Font.BOLD,11));
+                        vdv.setSize(700,1000);
+                        vdv.ticket.setText(t);
+                        vdv.ticket.updateUI();
+                        vdv.repaint();
+                    }
+                    
                 }else{
                     JOptionPane.showMessageDialog(vdv,"Selecciona una columna de la tabla");
                 }

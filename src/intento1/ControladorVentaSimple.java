@@ -68,6 +68,24 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             ventanaSimple.eliminar.setEnabled(true);
         }
   }
+    
+    
+    private void cargarTablaPoductos(){
+        List<Object[]> lista = new ArrayList<Object[]>();
+        List<Producto> productos = modelo.listProductos();
+        for(Producto c: productos){
+                Object[] o = new Object[3];
+                o[0] = c.getId();
+                o[1] = c.getNombre();
+                o[2] = c.getPrecio();
+                lista.add(o);
+            }
+     ventanaSimple.mtp.setDatos(lista);
+     ventanaSimple.tablaP.updateUI();
+    }
+    
+    
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -77,6 +95,10 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
         switch(accion){
             case "agregar":
             x = ventanaSimple.tablaP.getSelectedRow();
+            if(ventanaSimple.tablaC.getRowCount()>=15){
+                ventanaSimple.agregar.setEnabled(false);
+                JOptionPane.showMessageDialog(ventanaSimple,"Tope de ariticulos");
+            }
             if(x != -1){
             ventanaSimple.eliminar.setEnabled(true);
             Object[] o = new Object[3];
@@ -85,13 +107,15 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             o[2] = (Integer)ventanaSimple.cantidad.getValue();
             aux.add(o);
             int id = (Integer)ventanaSimple.tablaP.getValueAt(x,0);
-            Producto p = new Producto(x,(String)o[0],(Double)o[1]);
+            Producto p = new Producto(x,((String)o[0]),(Double)o[1]);
             cuenta.agregarProducto(p,(Integer)o[2]);
             this.ventanaSimple.mtv.setDatos(aux);
             this.ventanaSimple.tablaC.updateUI();
             ventanaSimple.generaCuenta.setEnabled(true);
             ventanaSimple.total.setText("Total :   $"+String.format("%.2f",cuenta.getTotal()));
             ventanaSimple.cantidad.setValue(1);
+            cargarTablaPoductos();
+            ventanaSimple.tablaP.repaint();
             }else{
                 JOptionPane.showMessageDialog(ventanaSimple,"Selecciona una columna");
             }
@@ -147,9 +171,13 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 vCuenta.add(cuent);
                 vCuenta.setResizable(false);
                 cuent.setFont(new Font("Arial",Font.BOLD,16));
-                vCuenta.setSize(500,500);
+                if(ventanaSimple.tablaC.getRowCount() > 9){
+                    vCuenta.setSize(600,800);
+                }else{
+                vCuenta.setSize(600,500);
+                }
                 String ic = String.format(    "\n    RECIBIDO:.......................................$%5.2f",Double.parseDouble(ventanaSimple.recibido.getText()));
-                ic = ic +   String.format(    "\n    CAMBIO ENTREGADO:...............................$%5.2f\n",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal());
+                ic = ic +   String.format(    "\n    CAMBIO ENTREGADO:......................$%5.2f\n",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal());
                 ic = ic + "  ATENDIO :"+ventanaSimple.usr;
                 cuent.setText(cuenta.toString()+ic);
                     //Conexion a base de datos
@@ -175,6 +203,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 ventanaSimple.total.setText("Total :   $0.0");
                 ventanaSimple.cambio.setText("Cambio :    ");
                 ventanaSimple.recibido.setText("");
+                ventanaSimple.agregar.setEnabled(true);
                 
                 }else{
                     JOptionPane.showMessageDialog(ventanaSimple,"No es suficiente dinero");

@@ -28,7 +28,7 @@ public class Cuenta{
                 +    "                    San FELIPE, Centro, 71290 Oaxaca de Juárez, Oax.      \n"+
                       ff.format(new Date())+"\n"+
                      "      ------------------------------------------------------------------------------------- \n"+
-                     " | CANTIDAD |            NOMBRE           | PRECIO UNI.|   SUBTOTAL  |  \n";
+                     " | CANTIDAD |                 NOMBRE                | PRECIO UNI.|   SUBTOTAL  |  \n";
        
     }
     
@@ -51,7 +51,7 @@ public class Cuenta{
             return "";
         for(int i = 0; i < contenido.size();i++){
                                   
-            s = s + String.format("  %2d                      %16s                   %5.2f       %5.2f\n",contenido.get(i).getCantidad(),
+            s = s + String.format("%20d   %-45s %.2f %10.2f\n",contenido.get(i).getCantidad(),
                     contenido.get(i).getNombre(),contenido.get(i).getPrecio(),(Double)(contenido.get(i).getCantidad()*contenido.get(i).getPrecio()));
         }
         s = s + String.format(    "\n    TOTAL:..........................................$%5.2f",total);
@@ -68,7 +68,7 @@ public class Cuenta{
     }
     
     public static void main(String[] args) {
-        Producto p = new Producto(10,"jlaksjdklsdmfklsmdf",250.99);
+        Producto p = new Producto(10,"jlaksjdklsdmfklsmdf",50.99);
         Producto p1 = new Producto(10,"jlaksjdklsdmfklsmdf",250.99);
         Cuenta c = new Cuenta();
         c.agregarProducto(p,5);
