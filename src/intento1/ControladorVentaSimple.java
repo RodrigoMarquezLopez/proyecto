@@ -82,6 +82,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             }
      ventanaSimple.mtp.setDatos(lista);
      ventanaSimple.tablaP.updateUI();
+     ventanaSimple.tablaP.repaint();
     }
     
     
@@ -179,7 +180,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
                 String ic = String.format(    "\n    RECIBIDO:.......................................$%5.2f",Double.parseDouble(ventanaSimple.recibido.getText()));
                 ic = ic +   String.format(    "\n    CAMBIO ENTREGADO:......................$%5.2f\n",Double.parseDouble(ventanaSimple.recibido.getText())-cuenta.getTotal());
                 ic = ic + "  ATENDIO :"+ventanaSimple.usr;
-                cuent.setText(cuenta.toString()+ic);
+                cuent.append(cuenta.toString()+ic);
                     //Conexion a base de datos
                     Object [] o = new Object[3];
                     SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
