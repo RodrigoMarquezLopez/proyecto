@@ -139,6 +139,7 @@ public class VentanaCrearUsr extends JDialog{
             this.setSize(600,400);
             this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             this.setResizable(false);
+            this.setIconImage(f.getIconImage());
         
     
     }
@@ -149,11 +150,7 @@ public class VentanaCrearUsr extends JDialog{
         nombre.addKeyListener(c);
     }
     
-    public static void main(String[] args) {
-        VentanaCrearUsr vcu = new VentanaCrearUsr(new JFrame());
-        ControladorCrearUsr c = new ControladorCrearUsr(vcu,new Modelo("proyecto"));
-        vcu.ConectaControlador(c);
-    }
+
  
     
     

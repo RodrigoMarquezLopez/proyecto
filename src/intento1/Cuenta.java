@@ -67,13 +67,6 @@ public class Cuenta{
         return contenido;
     }
     
-    public static void main(String[] args) {
-        Producto p = new Producto(10,"jlaksjdklsdmfklsmdf",50.99);
-        Producto p1 = new Producto(10,"jlaksjdklsdmfklsmdf",250.99);
-        Cuenta c = new Cuenta();
-        c.agregarProducto(p,5);
-        c.agregarProducto(p1,10);
-        System.out.println(c.toString());
-    }
+
     
 }

@@ -59,11 +59,11 @@ public class Login extends JFrame {
         SpringLayout s = new SpringLayout();
         JPanel main = new JPanel(s);
         main.setBackground(new Color(15, 157, 167));
-        JLabel titulo = title("EL PALACIO DE LA");
+        JLabel titulo = title("     SIMULADOR    ");
         main.add(titulo);
         s.putConstraint(SpringLayout.WEST, titulo, 12, SpringLayout.WEST, main);
         s.putConstraint(SpringLayout.NORTH, titulo, 22, SpringLayout.NORTH, main);
-        JLabel titulo2 = title("MEMORIA");
+        JLabel titulo2 = title("   CIBER      ");
         main.add(titulo2);
         s.putConstraint(SpringLayout.NORTH, titulo2, 40, SpringLayout.NORTH, titulo);
         s.putConstraint(SpringLayout.WEST, titulo2, 98, SpringLayout.WEST, main);
@@ -170,11 +170,7 @@ public class Login extends JFrame {
         return label;
     }
 
-    public static void main(String[] args) {
-        Login l = new Login();
-        ControladorLogin c = new ControladorLogin(l);
-        l.ConectaControlador(c);
-    }
+
 
     public void ConectaControlador(ControladorLogin c) {
         join.setActionCommand("ingresar");

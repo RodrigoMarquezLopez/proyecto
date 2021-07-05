@@ -142,18 +142,4 @@ public class VistaDatosVenta extends JDialog{
         this.seleccionar.addActionListener(c);
    }
     
-    
-    
-   
-    public static void main(String[] args) {
-        VistaDatosVenta vdv = new VistaDatosVenta(new JFrame());
-        ControladorDatosVenta c = new ControladorDatosVenta(vdv,new Modelo("proyecto"));
-        vdv.ConectaControlador(c);
-        
-    }
-    
-    
-    
-    
-    
 }

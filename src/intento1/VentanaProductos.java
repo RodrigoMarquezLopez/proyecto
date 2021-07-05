@@ -305,10 +305,5 @@ public class VentanaProductos extends JDialog{
     }
     
  
-    public static void main(String[] args) {
-        VentanaProductos vp = new VentanaProductos(null);
-        ControladorProductos c = new ControladorProductos(vp,new Modelo("proyecto"));
-        vp.conectaControlador(c);
-        vp.setVisible(true);
-    }
+
 }

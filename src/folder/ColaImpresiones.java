@@ -5,7 +5,6 @@
  */
 package folder;
 
-import intento1.Producto;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ColaImpresiones {
     protected Queue <Impresion> cola;
-    protected DefaultTableModel dtm;
+   // protected DefaultTableModel dtm;
     protected int numero;
     
     public ColaImpresiones(){

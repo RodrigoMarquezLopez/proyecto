@@ -5,14 +5,7 @@
  */
 package folder;
 
-import intento1.Cuenta;
-import intento1.Producto;
-import java.math.MathContext;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class Cronometro extends Thread { //una clase que hereda de la clase Thread
     protected String tiempo;
@@ -112,8 +105,4 @@ public boolean randoms(){
     
  
     
-    
- public static void main(String[] args) {
-         //Ejecuto el metodo run del Thread        
-    }// Fin main
-}//Fin Clase
+}

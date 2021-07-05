@@ -273,6 +273,10 @@ public class VistaPrincipal extends JFrame{
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresorabn.png",false),0);
         panelSubIm.add(formarPanelImpresora("src/imagenes/impresoracolor.png",true),1);
         //this.setVisible(true);
+        usr.setToolTipText(
+                    "Id : "+this.usuario.getId()+"  \n"+
+                    "Nombre : "+this.usuario.getNombre()+"  \n"+
+                    "Correo : "+this.usuario.getCorreo()+"  \n");
         this.setTitle("SIMULADOR CIBER");
         this.setIconImage(new ImageIcon("src/imagenes/cpu.png").getImage());
         this.setSize(1450,950);
@@ -353,12 +357,7 @@ public class VistaPrincipal extends JFrame{
         this.addWindowListener(c);
     }
     
-    public static void main(String[] args) {
-        //VistaPrincipal vp = new VistaPrincipal();
-        //Controlador c = new Controlador(vp);
-        //vp.conectControlador(c);
-    }
-    
+
        
     
     

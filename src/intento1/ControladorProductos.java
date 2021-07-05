@@ -158,6 +158,7 @@ private boolean validaEliminacion(int i){
                 if(!vpr.nombre.getText().equals("") && !vpr.id.getText().equals("") && !vpr.precioN.getText().equals("")){
                 String nombre = vpr.nombre.getText();
                 if(validaNombre(nombre)){
+                try{    
                     int id = Integer.parseInt(vpr.id.getText());
                     double precio = Double.parseDouble(vpr.precioN.getText());
                     boolean inst = modelo.insertProducto(new Producto(id,nombre,precio));
@@ -165,6 +166,10 @@ private boolean validaEliminacion(int i){
                         JOptionPane.showMessageDialog(vpr,"Error Desconocido");
                         
                     }
+                }catch(NumberFormatException ex){
+                   JOptionPane.showMessageDialog(vpr,"Error precio no valido"); 
+                   vpr.precioN.setText("");
+                }
                 }else{
                     JOptionPane.showMessageDialog(vpr,"Error nombre no valido");
                     vpr.nombre.setText("");
