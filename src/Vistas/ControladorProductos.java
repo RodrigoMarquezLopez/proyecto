@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package intento1;
+package Vistas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

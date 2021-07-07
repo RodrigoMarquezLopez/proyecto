@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Inicio;
+package Login;
 
-import folder.Controlador;
-import folder.VistaPrincipal;
-import intento1.Modelo;
+import Principal.Controlador;
+import Principal.VistaPrincipal;
+import Vistas.Modelo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;

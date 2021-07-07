@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package intento1;
+package Vistas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,12 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author rodri
  */
-public class ModeloTProductosVenta extends AbstractTableModel{
-    private List <Object[]> dato = new ArrayList<>();
+public class ModeloTablaDatosVentas extends AbstractTableModel{
+        private List <Object[]> dato = new ArrayList<>();
     private String encabezado[] = new String[]{
-    "Nombre","Precio","Cantidad"};
+    "Id Venta","Fecha Venta","Monto Total"};
     private Class tipos[] = new Class[]{
-    String.class,Double.class,Integer.class};
+    Integer.class,String.class,Double.class};
     
      public void setDatos(List<Object[]> d){
         dato = d;
@@ -39,5 +39,4 @@ public class ModeloTProductosVenta extends AbstractTableModel{
     public String getColumnName(int col){
         return encabezado[col];
     }
-    
 }

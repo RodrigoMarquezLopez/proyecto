@@ -5,8 +5,8 @@
  */
 package Ejecutar;
 
-import Inicio.ControladorLogin;
-import Inicio.Login;
+import Login.ControladorLogin;
+import Login.Login;
 
 /**
  *

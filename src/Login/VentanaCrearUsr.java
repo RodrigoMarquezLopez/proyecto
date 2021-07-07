@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Inicio;
+package Login;
 
 import componentesproyecto.BotonPersonalizado;
 import componentesproyecto.CuadroContr;
 import componentesproyecto.CuadroTex;
-import intento1.Modelo;
+import Vistas.Modelo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;

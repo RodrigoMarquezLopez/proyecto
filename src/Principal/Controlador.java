@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package folder;
+package Principal;
 
-import intento1.ControladorDatosVenta;
-import intento1.ControladorProductos;
-import intento1.ControladorVentaSimple;
-import intento1.Cuenta;
-import intento1.Modelo;
-import intento1.Producto;
-import intento1.VentanaProductos;
-import intento1.VistaDatosVenta;
-import intento1.VistaVentaSimple;
+import Vistas.ControladorDatosVenta;
+import Vistas.ControladorProductos;
+import Vistas.ControladorVentaSimple;
+import Vistas.Cuenta;
+import Vistas.Modelo;
+import Vistas.Producto;
+import Vistas.VentanaProductos;
+import Vistas.VistaDatosVenta;
+import Vistas.VistaVentaSimple;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;

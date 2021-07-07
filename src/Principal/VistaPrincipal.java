@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package folder;
+package Principal;
 
 
-import Inicio.Usuario;
+import Login.Usuario;
 import componentesproyecto.BotonPersonalizado;
 import componentesproyecto.Tabla;
 import componentesproyecto.Titulo;

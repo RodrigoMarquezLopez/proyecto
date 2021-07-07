@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package folder;
+package Principal;
 
-import intento1.Producto;
+import Vistas.Producto;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
