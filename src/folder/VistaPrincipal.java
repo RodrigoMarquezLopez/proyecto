@@ -256,6 +256,7 @@ public class VistaPrincipal extends JFrame{
         JLabel aux2 = new JLabel("                           Total Color: ");
         aux2.setForeground(Color.WHITE);
         aux2.setFont(new Font("Arial",Font.BOLD,25));
+        
         z.add(aux1);
         z.add(totalbn);
         z.add(aux2);
@@ -265,8 +266,16 @@ public class VistaPrincipal extends JFrame{
         w.setOpaque(false);
         JPanel y = new JPanel();
         y.setOpaque(false);
+        JPanel z1 = new JPanel();
+        z1.setLayout(new BorderLayout());
+        z1.setOpaque(false);
+        z1.add(z,BorderLayout.CENTER);
+        JPanel w1 = new JPanel();
+        w1.setOpaque(false);
+        w1.setPreferredSize(new Dimension(100,100));
+        z1.add(w1,BorderLayout.SOUTH);
         
-        panelImpresoras.add(z,BorderLayout.SOUTH);
+        panelImpresoras.add(z1,BorderLayout.SOUTH);
         panelImpresoras.add(y,BorderLayout.WEST);
         panelImpresoras.add(y,BorderLayout.EAST);
         
@@ -311,10 +320,6 @@ public class VistaPrincipal extends JFrame{
         imp.add(barrabn);
         equipo.setForeground(Color.WHITE);
         equipo.setFont(new Font("Arial",Font.BOLD,16));
-        //JLabel qui = new JLabel("Imprimirendo equipo :");
-        //qui.setForeground(Color.WHITE);
-        //qui.setFont(new Font("Arial",Font.BOLD,16));
-        //imp.add(qui);
         imp.add(equipo);
         imp.add(siguiente);
         s.setPreferredSize(new Dimension(400,75));
@@ -326,11 +331,7 @@ public class VistaPrincipal extends JFrame{
         imp.add(barracolor);
         equipo2.setForeground(Color.WHITE);
         equipo2.setFont(new Font("Arial",Font.BOLD,16));
-        //JLabel qui = new JLabel("Imprimirendo equipo :");
-        //qui.setForeground(Color.WHITE);
-        //qui.setFont(new Font("Arial",Font.BOLD,16));
-        //imp.add(qui);
-        imp.add(equipo2);
+         imp.add(equipo2);
         imp.add(siguiente);
         s1.setPreferredSize(new Dimension(400,75));
         imp.add(s1);
