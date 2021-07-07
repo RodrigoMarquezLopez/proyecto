@@ -125,7 +125,7 @@ private boolean validaEliminacion(int i){
                     int id = Integer.parseInt(vpr.selI.getText());
                     String s = vpr.selN.getText();
                     boolean act = modelo.updateProducto(new Producto(id,s,d));
-                    System.out.println(act);
+                    //System.out.println(act);
                     //if(!modelo.updateCliente(new Producto(id,s,d))){
                       //  JOptionPane.showMessageDialog(vpr,"Ha ocurrido un error");
                     //}

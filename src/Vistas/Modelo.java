@@ -50,7 +50,7 @@ public class Modelo {
             System.err.println("ERROR AL CONECTAR CON EL SERVIDOR");
             System.exit(0); //parar la ejecución
         }
-        System.out.println("Conectado a "+baseDatos);
+       // System.out.println("Conectado a "+baseDatos);
     }
     
     public List<Producto> listProductos(){
@@ -219,7 +219,7 @@ public boolean deleteProducto(int p){
         if ( getConexion() != null){
             try {
                 getConexion().close();
-                System.out.println("Conexion Cerrada");
+                //System.out.println("Conexion Cerrada");
             } catch(SQLException e){
                 System.err.println("Error al cerrar la bd "+ e);
             }
@@ -387,7 +387,7 @@ public String ticket(int id){
             ps.setString(1, usr.getNombre());
             ps.setString(2, usr.getPass());
             ps.setString(3, usr.getCorreo());
-            System.out.println("usuario agregado");
+           // System.out.println("usuario agregado");
             //Ejecutar el comando insert
             ps.executeUpdate();
             return true;

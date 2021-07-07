@@ -6,7 +6,6 @@
 package Vistas;
 
 import componentesproyecto.BotonPersonalizado;
-import componentesproyecto.CuadroTex;
 import componentesproyecto.Spin;
 import componentesproyecto.Tabla;
 import componentesproyecto.Titulo;
@@ -23,12 +22,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JSpinner.DateEditor;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DateFormatter;
 
 /**

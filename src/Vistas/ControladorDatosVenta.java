@@ -9,10 +9,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javafx.geometry.VPos;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,7 +47,7 @@ private void cargarTableVentas(){
                 try{
                 SimpleDateFormat ff = new SimpleDateFormat("YYYY-MM-dd");
                 String s =   ff.format((Date)vdv.fecha.getValue());
-                System.out.println(s);
+                //System.out.println(s);
                 List<Object []> lista = modelo.listVentas(s);
                 
                 if(!lista.isEmpty()){    
@@ -69,11 +67,11 @@ private void cargarTableVentas(){
             case "seleccionar":
                 int x = vdv.ventas.getSelectedRow();
                 if(x != -1){
-                    System.out.println(x);
+                    //System.out.println(x);
                     int id = (Integer) vdv.ventas.getValueAt(x,0);
                     vdv.ticket.setText("");
                     String t = modelo.ticket(id);
-                    System.out.println(t.length());
+                    //System.out.println(t.length());
                     if(t.length()<1700){
                     vdv.ticket.setSize(390,500);
                     vdv.ticket.setFont(new Font("Arial",Font.BOLD,12));
