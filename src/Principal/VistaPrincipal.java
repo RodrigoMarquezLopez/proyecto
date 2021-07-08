@@ -92,6 +92,7 @@ public class VistaPrincipal extends JFrame{
         tablaEquipos.setRowHeight(100);
         tablaEquipos.setToolTipText("Equipos a rentar");
         JScrollPane sp = new JScrollPane(tablaEquipos);
+        sp.setOpaque(false);
        // sp.setPreferredSize(new Dimension(900,500));
         
         

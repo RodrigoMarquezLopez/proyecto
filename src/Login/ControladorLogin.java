@@ -34,10 +34,6 @@ public class ControladorLogin implements ActionListener {
                     Usuario usr = new Usuario(log.txuser.getText(), Hash.md5(new String(log.passwordField.getPassword())));
                     boolean aux = modelo.login(usr);
                     if (aux) {
-                        System.out.println("Sobres entre");
-                        System.out.println(usr.getId());
-                        System.out.println(usr.getNombre());
-                        System.out.println(usr.getCorreo());
                         VistaPrincipal vp = new VistaPrincipal(usr);
                         Controlador c = new Controlador(vp, modelo);
                         vp.conectControlador(c);

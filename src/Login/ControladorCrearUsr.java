@@ -85,7 +85,6 @@ public class ControladorCrearUsr implements ActionListener,KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         char k = e.getKeyChar();
-        //System.out.println(k != '.');
         JTextField productor = (JTextField) e.getSource();
        
         if(productor == (JTextField)vcu.nombre){
