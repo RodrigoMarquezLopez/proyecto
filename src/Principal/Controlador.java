@@ -96,12 +96,22 @@ public class Controlador implements ActionListener,WindowListener{
     
     public void cargarCostoImpresiones(){
         List<Producto> productos = modelo.listProductos("Impresion");
+       // System.out.println(!productos.isEmpty());
+        if(!productos.isEmpty()){
+            
         for(int i = 0; i<productos.size(); i++){
             Producto p = productos.get(i);
             if(p.getNombre().equals("Impresiones color"))
                 impresionColor = p;
             if(p.getNombre().equals("Impresiones B/N"))
                 impresionBN = p;
+        }
+        }else{
+            impresionBN = new Producto(3,"Impresiones B/N",0.95);
+            impresionColor = new Producto(4,"Impresiones color",2.5);
+            modelo.insertProducto(impresionBN);
+            modelo.insertProducto(impresionColor);
+                   
         }
 }
 
