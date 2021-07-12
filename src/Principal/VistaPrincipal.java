@@ -87,7 +87,11 @@ public class VistaPrincipal extends JFrame{
         
         panelEquipos.setLayout(new BorderLayout());
         panelEquipos.setBackground(new Color(33, 45, 62, 255));
-        modeloE = new DefaultTableModel(columnas,0);
+        modeloE = new DefaultTableModel(columnas,0){
+        public boolean isCellEditable(int f, int c){
+                return false;
+            }
+        };
         tablaEquipos = new Tabla(modeloE);
         tablaEquipos.setRowHeight(100);
         tablaEquipos.setToolTipText("Equipos a rentar");
@@ -218,8 +222,17 @@ public class VistaPrincipal extends JFrame{
         barracolor = new JProgressBar();
         equipo = new JLabel();
         equipo2 = new JLabel();
-        modeloIBN = new DefaultTableModel(columnasImp,0);
-        modeloColor = new DefaultTableModel(columnasImp,0);
+        modeloIBN = new DefaultTableModel(columnasImp,0){
+            @Override
+            public boolean isCellEditable(int f, int c){
+                return false;
+            }
+        };
+        modeloColor = new DefaultTableModel(columnasImp,0){
+        public boolean isCellEditable(int f, int c){
+                return false;
+            }
+        };
         colaBn = new Tabla(modeloIBN);
         colaBn.setToolTipText("Documento siguiente a imprimir");
         colaColor = new Tabla(modeloColor);
