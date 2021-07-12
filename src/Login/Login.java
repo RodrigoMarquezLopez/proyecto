@@ -47,7 +47,6 @@ public class Login extends JFrame {
         setLayout(new GridLayout(1, 1));
         add(Logo());
         add(Log());
-
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -144,7 +143,7 @@ public class Login extends JFrame {
         join.setBackground(new Color(33, 45, 62, 255));
         join.setBorder(null);
         join.setToolTipText("Ingresar con el usuario");
-       // join.setActionCommand("ingresar");
+        // join.setActionCommand("ingresar");
         //join.addActionListener(this);
         r.fill = GridBagConstraints.HORIZONTAL;
         r.gridwidth = GridBagConstraints.REMAINDER;
@@ -155,7 +154,7 @@ public class Login extends JFrame {
         Nuevo.setBorder(null);
         Nuevo.setToolTipText("Crear un nuevo usuario");
         Nuevo.setBackground(new Color(33, 45, 62, 255));
-        formulario.add(Nuevo,r);
+        formulario.add(Nuevo, r);
         main.add(formulario, BorderLayout.CENTER);
         JPanel col = new JPanel();
         col.setBackground(new Color(0, 0, 0, 0));
@@ -170,18 +169,18 @@ public class Login extends JFrame {
         return label;
     }
 
-
-
     public void ConectaControlador(ControladorLogin c) {
         join.setActionCommand("ingresar");
         join.addActionListener(c);
-        
+
         Nuevo.setActionCommand("nuevo");
         Nuevo.addActionListener(c);
-        
+
+        txuser.addKeyListener(c);
+        passwordField.addKeyListener(c);
+
         close.setActionCommand("cerrar");
         close.addActionListener(c);
-
     }
 
 }
