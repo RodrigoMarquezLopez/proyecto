@@ -54,7 +54,7 @@ public class Cronometro extends Thread { //una clase que hereda de la clase Thre
                         nuSeg=0;//pongo en cero los segundos 
                         nuMin++;//incremento el numero de minutos
                         dtm.setValueAt(costo*(nuMin+1),row,3);
-                     //if(impb || impc){   
+                     //if((impb || impc) &&(nuMin > 5)){   
                         if(randoms()){
                             if(rImpresora){
                             Impresion i = new Impresion(3,"Impresiones B/N",0.0,(row+1));

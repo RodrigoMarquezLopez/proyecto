@@ -50,6 +50,9 @@ public class VistaVentaSimple extends JDialog{
     protected final String rBuqueda = "Ingresa busqueda";
     protected JLabel total;
     protected String usr;
+    protected JScrollPane jsp1;
+    protected JScrollPane jsp2;
+    
     
     public VistaVentaSimple(JFrame f,Cuenta as,String usr){
         super(f);
@@ -113,11 +116,11 @@ public class VistaVentaSimple extends JDialog{
         
         
        
-        JScrollPane jsp1 = new JScrollPane(tablaP);
-        JScrollPane jsp2 = new JScrollPane(tablaC);
+        jsp1 = new JScrollPane(tablaP);
+        jsp2 = new JScrollPane(tablaC);
         jsp2.setBackground(Color.lightGray);
         jsp1.setPreferredSize(new Dimension(550,250));
-        jsp2.setPreferredSize(new Dimension(550,250));
+        jsp2.setPreferredSize(new Dimension(535,250));
         
         izq.setLayout(new FlowLayout());
         der.setLayout(new FlowLayout());

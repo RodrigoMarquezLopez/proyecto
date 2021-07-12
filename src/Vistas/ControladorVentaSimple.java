@@ -6,6 +6,7 @@
 package Vistas;
 
 import componentesproyecto.CuadroTex;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -107,6 +108,7 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             Producto p = new Producto(x,((String)o[0]),(Double)o[1]);
             cuenta.agregarProducto(p,(Integer)o[2]);
             this.ventanaSimple.mtv.setDatos(aux);
+            redimensionarTablaCompras();
             this.ventanaSimple.tablaC.updateUI();
             ventanaSimple.generaCuenta.setEnabled(true);
             ventanaSimple.total.setText("Total :   $"+String.format("%.2f",cuenta.getTotal()));
@@ -251,6 +253,19 @@ public class ControladorVentaSimple implements ActionListener,KeyListener,FocusL
             }
         }
         
+    }
+    
+    public void redimensionarTablaCompras(){
+        int p = ventanaSimple.tablaC.getRowCount();
+        System.out.println(p);
+        if(p < 6){
+            ventanaSimple.jsp2.setPreferredSize(new Dimension(535,250));
+            
+        }else{
+            ventanaSimple.jsp2.setPreferredSize(new Dimension(550,250));
+        }
+        ventanaSimple.jsp2.repaint();
+        ventanaSimple.jsp2.updateUI();
     }
 
     @Override
