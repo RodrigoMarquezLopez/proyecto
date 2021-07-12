@@ -10,13 +10,16 @@ import Principal.VistaPrincipal;
 import Vistas.Modelo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author rodri
  */
-public class ControladorLogin implements ActionListener {
+public class ControladorLogin implements ActionListener, KeyListener {
 
     private Login log;
     private Modelo modelo;
@@ -34,6 +37,10 @@ public class ControladorLogin implements ActionListener {
                     Usuario usr = new Usuario(log.txuser.getText(), Hash.md5(new String(log.passwordField.getPassword())));
                     boolean aux = modelo.login(usr);
                     if (aux) {
+                        System.out.println("Sobres entre");
+                        System.out.println(usr.getId());
+                        System.out.println(usr.getNombre());
+                        System.out.println(usr.getCorreo());
                         VistaPrincipal vp = new VistaPrincipal(usr);
                         Controlador c = new Controlador(vp, modelo);
                         vp.conectControlador(c);
@@ -60,6 +67,21 @@ public class ControladorLogin implements ActionListener {
                 break;
         }
 
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (KeyEvent.VK_ENTER == e.getKeyCode()) {
+           ((JComponent) e.getSource()).transferFocus(); 
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 
 }
