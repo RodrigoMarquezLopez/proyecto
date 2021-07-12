@@ -116,8 +116,8 @@ public class VistaVentaSimple extends JDialog{
         JScrollPane jsp1 = new JScrollPane(tablaP);
         JScrollPane jsp2 = new JScrollPane(tablaC);
         jsp2.setBackground(Color.lightGray);
-        jsp1.setPreferredSize(new Dimension(550,150));
-        jsp2.setPreferredSize(new Dimension(550,150));
+        jsp1.setPreferredSize(new Dimension(550,250));
+        jsp2.setPreferredSize(new Dimension(550,250));
         
         izq.setLayout(new FlowLayout());
         der.setLayout(new FlowLayout());
@@ -140,6 +140,7 @@ public class VistaVentaSimple extends JDialog{
         izq.add(buscar);
        izq.add(jsp1);
        principal.add(izq,0);
+       //izq.setPreferredSize(new Dimension(1200,700));
        JLabel canad = new JLabel("Cantidad :");
        canad.setForeground(Color.WHITE);
        canad.setFont(new Font("Arial",Font.BOLD,16));
@@ -185,16 +186,17 @@ public class VistaVentaSimple extends JDialog{
        cal.add(cambio);
        sur.add(cal,BorderLayout.NORTH);
        sur.add(generaCuenta,BorderLayout.SOUTH);
-       
+      /// sur.setPreferredSize(new Dimension(1200,100));
        
        principal.add(der,1);
-       principal.add(cen,2);
+      // principal.add(cen,2);
+      // principal.setPreferredSize(new Dimension(1200,500));
        this.add(sur,BorderLayout.SOUTH);
        this.add(principal,BorderLayout.CENTER);
        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-       this.setSize(new Dimension(1200,700));
+       this.setSize(new Dimension(1200,600));
        this.setTitle("Ventana de ventas");
-       this.setResizable(false);
+      // this.setResizable(false);
        this.setIconImage(f.getIconImage());
        //this.setModal(true);
        //this.pack();
